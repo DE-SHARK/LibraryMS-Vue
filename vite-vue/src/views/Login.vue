@@ -158,8 +158,12 @@ const handleRegister = () => {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100vw;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .form-container {
