@@ -5,18 +5,11 @@
         <div class="logo">LibraryMS <span class="platform-tag">开放平台</span></div>
       </div>
       
-      <div class="tabs">
-        <div class="tab active">验证码登录</div>
-        <div class="tab">密码登录</div>
-      </div>
-      
       <div class="form-content">
-        <div class="tip-text">您所在地区仅支持 手机号 / 微信 / 邮箱 登录</div>
-        
         <div class="input-group">
           <div class="input-wrapper">
-            <i class="icon-email"></i>
-            <input type="text" placeholder="请输入手机号/邮箱地址" />
+            <i class="icon-user"></i>
+            <input type="text" placeholder="请输入用户名" />
           </div>
         </div>
         
@@ -170,10 +163,14 @@ const goToSignUp = () => {
   font-size: 14px;
 }
 
-.icon-email, .icon-lock, .icon-eye {
+.icon-user, .icon-lock, .icon-eye {
   width: 20px;
   color: #999;
   margin-right: 8px;
+}
+
+.icon-user:before {
+  content: "👤";
 }
 
 .icon-eye {
