@@ -9,20 +9,20 @@
         <div class="input-group">
           <div class="input-wrapper">
             <i class="icon-user"></i>
-            <input type="text" placeholder="请输入用户名" />
+            <input v-model="username" type="text" placeholder="请输入用户名" />
           </div>
         </div>
         
         <div class="input-group">
           <div class="input-wrapper">
             <i class="icon-lock"></i>
-            <input type="password" placeholder="请输入密码" />
+            <input v-model="password" type="password" placeholder="请输入密码" />
             <i class="icon-eye"></i>
           </div>
         </div>
         
         <div class="agreement">
-          <input type="checkbox" id="agree" />
+          <input v-model="rememberMe" type="checkbox" id="agree" />
           <label for="agree">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></label>
         </div>
         
@@ -48,13 +48,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
-const goToSignUp = () => {
-  router.push('/sign_up');
-};
+const username = ref('');
+const password = ref('');
+const rememberMe = ref(false);
 </script>
 
 <style scoped>
@@ -103,43 +100,8 @@ const goToSignUp = () => {
   font-weight: normal;
 }
 
-.tabs {
-  display: flex;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 0;
-  margin-right: 20px;
-  cursor: pointer;
-  position: relative;
-  color: #999;
-}
-
-.tab.active {
-  color: #000;
-  font-weight: 500;
-}
-
-.tab.active:after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #000;
-}
-
 .form-content {
   padding: 10px 0;
-}
-
-.tip-text {
-  font-size: 14px;
-  color: #999;
-  margin-bottom: 20px;
 }
 
 .input-group {
