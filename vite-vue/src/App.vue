@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { createApp } from 'vue'
-import router from './router'
 </script>
 
 <template>
