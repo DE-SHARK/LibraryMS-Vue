@@ -68,16 +68,26 @@ const handleLogin = async () => {
 
   try {
     isLoading.value = true;
+    console.log('正在发送登录请求...');
     const response = await axios.post('http://localhost:8080/api/auth/login', {
       username: username.value,
       password: password.value
     });
 
+    console.log('登录响应:', response);
+    
     if (response.status === 200) {
+      const token = response.data.data.accessToken;
+      console.log('获取到的Token:', token);
+      
       // 保存token到localStorage
-      localStorage.setItem('accessToken', response.data.data.accessToken);
+      localStorage.setItem('accessToken', token);
       ElMessage.success('登录成功');
-      router.push('/');
+      
+      // 添加1秒延迟以便用户看到成功提示
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
     }
   } catch (error) {
     ElMessage.error('登录失败，请检查用户名和密码');
