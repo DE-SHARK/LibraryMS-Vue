@@ -86,7 +86,7 @@ const handleLogin = async () => {
       
       // 添加1秒延迟以便用户看到成功提示
       setTimeout(() => {
-        router.push('/');
+        router.push('/home');
       }, 1000);
     }
   } catch (error) {
