@@ -4,53 +4,57 @@
       <div class="header">
         <div class="logo">LibraryMS <span class="platform-tag">开放平台</span></div>
       </div>
-      
-      <div class="signup-content">
+
+      <el-form ref="signupForm" :model="formData" :rules="rules" class="signup-content">
         <div class="title-text">只需一个 LibraryMS 账号，即可访问 LibraryMS 的所有服务。</div>
         <div class="subtitle-text">请输入用户名和邮箱进行注册</div>
-        
-        <div class="input-group">
+
+        <el-form-item prop="username">
           <div class="input-wrapper">
             <i class="icon-user"></i>
-            <input type="text" placeholder="请输入用户名" />
+            <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
           </div>
-        </div>
-        
-        <div class="input-group">
+        </el-form-item>
+
+        <el-form-item prop="email">
           <div class="input-wrapper">
             <i class="icon-email"></i>
-            <input type="email" placeholder="请输入邮箱地址" />
+            <el-input v-model="formData.email" placeholder="请输入邮箱地址" type="email" clearable />
           </div>
-        </div>
-        
-        <div class="input-group">
+        </el-form-item>
+
+        <el-form-item prop="password">
           <div class="input-wrapper">
             <i class="icon-lock"></i>
-            <input type="password" placeholder="请输入密码" />
-            <i class="icon-eye"></i>
+            <el-input v-model="formData.password" placeholder="请输入密码" type="password" show-password />
           </div>
-        </div>
-        
-        <div class="input-group">
+        </el-form-item>
+
+        <el-form-item prop="confirmPassword">
           <div class="input-wrapper">
             <i class="icon-lock"></i>
-            <input type="password" placeholder="请再次输入密码" />
-            <i class="icon-eye"></i>
+            <el-input v-model="formData.confirmPassword" placeholder="请再次输入密码" type="password" show-password />
           </div>
-        </div>
-        
+        </el-form-item>
+
         <div class="agreement">
-          <input type="checkbox" id="agree" />
+          <el-checkbox v-model="isAgreed" id="agree" />
           <label for="agree">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></label>
         </div>
-        
-        <button class="signup-btn">注册</button>
-        
+
+        <el-button
+            :loading="isLoading"
+            class="signup-btn"
+            @click="handleSignUp"
+        >
+          注册
+        </el-button>
+
         <div class="bottom-links">
           <a href="#" class="forgot-pwd">忘记密码</a>
           <a href="/sign_in" class="login-link">返回登录</a>
         </div>
-      </div>
+      </el-form>
     </div>
   </div>
 </template>
@@ -61,18 +65,26 @@ import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
 
-const router = useRouter();
+// 添加类型定义
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
-// 表单数据
-const formData = ref({
+// 表单数据定义
+const formData = ref<FormData>({
   username: '',
   email: '',
   password: '',
   confirmPassword: ''
 });
 
+const router = useRouter();
+const signupForm = ref();  // 用于表单验证
 const isAgreed = ref(false);
-const signupForm = ref();
+const isLoading = ref(false);
 
 // 表单验证规则
 const rules = {
@@ -103,9 +115,6 @@ const rules = {
   ]
 };
 
-// 注册状态
-const isLoading = ref(false);
-
 // 提交注册
 const handleSignUp = async () => {
   try {
@@ -121,7 +130,7 @@ const handleSignUp = async () => {
 
     const { confirmPassword, ...registerData } = formData.value;
 
-    const response = await axios.post('/api/auth/register', registerData);
+    const response = await axios.post('http://localhost:8080/api/auth/register', registerData);
 
     if (response.data) {
       ElMessage.success('注册成功');
@@ -203,10 +212,6 @@ const handleSignUp = async () => {
   text-align: center;
 }
 
-.input-group {
-  margin-bottom: 16px;
-}
-
 .input-wrapper {
   display: flex;
   align-items: center;
@@ -214,19 +219,6 @@ const handleSignUp = async () => {
   border-radius: 4px;
   padding: 0 12px;
   height: 44px;
-}
-
-.phone-input {
-  display: flex;
-  align-items: center;
-}
-
-.country-code {
-  display: flex;
-  align-items: center;
-  padding-right: 8px;
-  border-right: 1px solid #eee;
-  margin-right: 8px;
 }
 
 .icon-user:before {
@@ -245,18 +237,11 @@ const handleSignUp = async () => {
   font-size: 14px;
 }
 
-.icon-user, .icon-email, .icon-lock, .icon-eye, .icon-shield {
+.icon-user, .icon-email, .icon-lock {
   width: 20px;
   color: #999;
   margin-right: 8px;
 }
-
-.icon-eye {
-  margin-right: 0;
-  margin-left: 8px;
-  cursor: pointer;
-}
-
 
 .agreement {
   display: flex;
