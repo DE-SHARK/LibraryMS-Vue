@@ -58,11 +58,84 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus';
+import axios from 'axios';
 
 const router = useRouter();
 
-const goToSignIn = () => {
-  router.push('/sign_in');
+// 表单数据
+const formData = ref({
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+});
+
+const isAgreed = ref(false);
+const signupForm = ref();
+
+// 表单验证规则
+const rules = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度在3到20个字符', trigger: 'blur' }
+  ],
+  email: [
+    { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+    { type: 'email', message: '请输入正确的邮箱格式', trigger: ['blur', 'change'] }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 20, message: '密码长度在6到20个字符', trigger: 'blur' }
+  ],
+  confirmPassword: [
+    { required: true, message: '请再次输入密码', trigger: 'blur' },
+    {
+      validator: (rule: any, value: string, callback: any) => {
+        if (value !== formData.value.password) {
+          callback(new Error('两次输入密码不一致'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'blur'
+    }
+  ]
+};
+
+// 注册状态
+const isLoading = ref(false);
+
+// 提交注册
+const handleSignUp = async () => {
+  try {
+    // 验证表单
+    await signupForm.value.validate();
+    
+    if (!isAgreed.value) {
+      ElMessage.warning('请先同意用户协议和隐私政策');
+      return;
+    }
+
+    isLoading.value = true;
+
+    const { confirmPassword, ...registerData } = formData.value;
+
+    const response = await axios.post('/api/auth/register', registerData);
+
+    if (response.data) {
+      ElMessage.success('注册成功');
+      router.push('/sign_in');
+    }
+  } catch (error: any) {
+    if (error.response?.status === 409) {
+      ElMessage.error('用户名或邮箱已存在');
+    } else {
+      ElMessage.error('注册失败，请稍后重试');
+    }
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
