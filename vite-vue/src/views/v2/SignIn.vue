@@ -26,7 +26,9 @@
           <label for="agree">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></label>
         </div>
         
-        <button class="login-btn">登录</button>
+        <button class="login-btn" :disabled="isLoading" @click="handleLogin">
+          {{ isLoading ? '登录中...' : '登录' }}
+        </button>
         
         <div class="bottom-links">
           <a href="#" class="forgot-pwd">忘记密码</a>
@@ -48,13 +50,48 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus';
 
+const router = useRouter();
 const username = ref('');
 const password = ref('');
 const rememberMe = ref(false);
+const isLoading = ref(false);
+
+const handleLogin = async () => {
+  if (!username.value || !password.value) {
+    ElMessage.warning('请输入用户名和密码');
+    return;
+  }
+
+  try {
+    isLoading.value = true;
+    const response = await axios.post('http://localhost:8080/api/auth/login', {
+      username: username.value,
+      password: password.value
+    });
+
+    if (response.status === 200) {
+      // 保存token到localStorage
+      localStorage.setItem('accessToken', response.data.data.accessToken);
+      ElMessage.success('登录成功');
+      router.push('/');
+    }
+  } catch (error) {
+    ElMessage.error('登录失败，请检查用户名和密码');
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 
 <style scoped>
+.login-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 .LibraryMS-container {
   display: flex;
   justify-content: center;
