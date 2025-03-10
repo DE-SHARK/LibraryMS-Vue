@@ -11,28 +11,24 @@
 
         <el-form-item prop="username">
           <div class="input-wrapper">
-            <i class="icon-user"></i>
             <el-input v-model="formData.username" placeholder="请输入用户名" clearable />
           </div>
         </el-form-item>
 
         <el-form-item prop="email">
           <div class="input-wrapper">
-            <i class="icon-email"></i>
             <el-input v-model="formData.email" placeholder="请输入邮箱地址" type="email" clearable />
           </div>
         </el-form-item>
 
         <el-form-item prop="password">
           <div class="input-wrapper">
-            <i class="icon-lock"></i>
             <el-input v-model="formData.password" placeholder="请输入密码" type="password" show-password />
           </div>
         </el-form-item>
 
         <el-form-item prop="confirmPassword">
           <div class="input-wrapper">
-            <i class="icon-lock"></i>
             <el-input v-model="formData.confirmPassword" placeholder="请再次输入密码" type="password" show-password />
           </div>
         </el-form-item>
@@ -220,27 +216,12 @@ const handleSignUp = async () => {
   padding: 0 12px;
   height: 44px;
 }
-
-.icon-user:before {
-  content: "👤";
-}
-
-.icon-email:before {
-  content: "✉️";
-}
-
 .input-wrapper input {
   flex: 1;
   border: none;
   outline: none;
   height: 100%;
   font-size: 14px;
-}
-
-.icon-user, .icon-email, .icon-lock {
-  width: 20px;
-  color: #999;
-  margin-right: 8px;
 }
 
 .agreement {
