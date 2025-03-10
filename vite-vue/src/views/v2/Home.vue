@@ -3,7 +3,7 @@
     <!-- 顶部导航栏 -->
     <header class="header">
       <div class="logo-container">
-        <img src="@/assets/logo.svg" alt="图书馆管理系统" class="logo" />
+        <img src="../../assets/logo.svg" alt="图书馆管理系统" class="logo" />
         <h1 class="site-title">智慧图书馆</h1>
       </div>
       <nav class="nav-menu">
@@ -15,7 +15,7 @@
       </nav>
       <div class="user-actions">
         <div class="user-info">
-          <img src="@/assets/avatar.svg" alt="用户头像" class="avatar" />
+          <img src="../../assets/avatar.svg" alt="用户头像" class="avatar" />
           <span class="username">游客</span>
         </div>
         <button class="logout-btn">退出</button>
@@ -28,7 +28,7 @@
       <section class="hero-section">
         <div class="carousel">
           <div class="carousel-item active">
-            <img src="@/assets/banner1.jpg" alt="图书馆新馆开放" />
+            <img src="../../assets/banner1.jpg" alt="图书馆新馆开放" />
             <div class="carousel-caption">
               <h2>欢迎来到智慧图书馆</h2>
               <p>知识的海洋，智慧的殿堂</p>
@@ -79,7 +79,7 @@
         <div class="books-carousel">
           <div class="book-card">
             <div class="book-cover">
-              <img src="@/assets/book1.jpg" alt="书籍封面" />
+<!--              <img src="@/assets/book1.jpg" alt="书籍封面" />-->
             </div>
             <div class="book-info">
               <h3 class="book-title">人工智能导论</h3>
@@ -98,7 +98,7 @@
           </div>
           <div class="book-card">
             <div class="book-cover">
-              <img src="@/assets/book2.jpg" alt="书籍封面" />
+<!--              <img src="@/assets/book2.jpg" alt="书籍封面" />-->
             </div>
             <div class="book-info">
               <h3 class="book-title">数据结构与算法分析</h3>
@@ -117,7 +117,7 @@
           </div>
           <div class="book-card">
             <div class="book-cover">
-              <img src="@/assets/book3.jpg" alt="书籍封面" />
+<!--              <img src="@/assets/book3.jpg" alt="书籍封面" />-->
             </div>
             <div class="book-info">
               <h3 class="book-title">现代文学赏析</h3>
