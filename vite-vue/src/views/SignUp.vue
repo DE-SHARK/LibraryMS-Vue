@@ -209,13 +209,15 @@ const handleSignUp = async () => {
 }
 
 .input-wrapper {
+  width: 100%;
+  height: 44px;
   display: flex;
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 0 12px;
-  height: 44px;
 }
+
 .input-wrapper input {
   flex: 1;
   border: none;
