@@ -10,9 +10,9 @@
       <!-- 注册表单 -->
       <div class="form-title">用户注册</div>
 
-      <div class="register-tip">请填写以下信息完成注册</div>
+      <div class="auth-tip">请填写以下信息完成注册</div>
 
-      <el-form ref="registerForm" :model="formData" :rules="rules" class="register-form">
+      <el-form ref="registerForm" :model="formData" :rules="rules" class="auth-form">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -56,7 +56,7 @@
 
         <el-button
             type="primary"
-            class="register-button"
+            class="auth-button"
             :disabled="!agreement"
             @click="handleRegister"
         >注册</el-button>
@@ -161,85 +161,13 @@ const handleRegister = async () => {
 </script>
 
 <style scoped>
-.lms-auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-}
-
-.lms-auth-form-wrapper {
-  width: 400px;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.logo-container {
-  text-align: center;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: bold;
-  display: inline-block;
-  margin: 0 15px 0 0;
-  line-height: 1;
-}
-
-.logo-subtitle {
-  display: inline-flex;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 25px;
-  font-weight: 500;
-  height: 36px;
-}
+@import '../styles/auth.css';
 
 .form-title {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-}
-
-.register-tip {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.register-form {
-  margin-bottom: 20px;
-}
-
-.agreement {
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-.agreement a {
-  color: #1890ff;
-  text-decoration: none;
-}
-
-.register-button {
-  width: 100%;
-  height: 40px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  background-color: #000;
-  border-color: #000;
 }
 
 .actions {
