@@ -83,12 +83,16 @@
 </template>
 
 <script setup lang="ts">
+// Vue 核心库
 import { ref, defineComponent } from 'vue';
+import { useCssModule } from 'vue';
+
+// 第三方库
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
-// 导入 Element Plus 图标
 import { User, Message, Lock } from '@element-plus/icons-vue';
-// 导入封装的 API
+
+// API 导入
 import { register } from '@/api/auth';
 
 // 定义组件名称
@@ -96,11 +100,10 @@ defineComponent({
   name: 'SignUp'
 });
 
-// 添加 CSS Modules 类型声明
-import { useCssModule } from 'vue';
+// 获取 CSS Modules 样式
 const style = useCssModule();
 
-// 添加类型定义
+// 类型定义
 interface FormData {
   username: string;
   email: string;
@@ -181,6 +184,5 @@ const handleRegister = async () => {
 </script>
 
 <style lang="scss" module>
-// 修改样式引用方式，使用与组件同名的样式文件
-@use './sign-up.module.scss';
+@use '@/views/auth/sign-up.module.scss';
 </style>
