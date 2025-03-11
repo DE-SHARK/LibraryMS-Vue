@@ -1,21 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SignIn from '../views/auth/sign-in.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: SignIn
+      redirect: '/auth/sign-in' // 重定向到登录页面
     },
     {
-      path: '/sign_in',
-      name: 'signIn',
+      path: '/auth/sign-in',
+      name: 'SignIn',
       component: () => import('../views/auth/sign-in.vue')
-    },    {
-      path: '/sign_up',
-      name: 'signUp',
+    },
+    {
+      path: '/auth/sign-up',
+      name: 'SignUp',
       component: () => import('../views/auth/sign-up.vue')
     }
   ]

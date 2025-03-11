@@ -83,12 +83,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref, defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 // 导入 Element Plus 图标
 import { User, Message, Lock } from '@element-plus/icons-vue';
+// 导入封装的 API
+import { register } from '@/api/auth';
+
+// 定义组件名称
+defineComponent({
+  name: 'SignUp'
+});
 
 // 添加 CSS Modules 类型声明
 import { useCssModule } from 'vue';
@@ -153,27 +159,23 @@ const handleRegister = async () => {
   try {
     await registerForm.value.validate();
 
-    // 发送注册请求
-    const response = await axios.post('http://localhost:8080/api/auth/register', {
+    // 使用封装的 API 发送注册请求
+    const response = await register({
       username: formData.value.username,
       email: formData.value.email,
       password: formData.value.password
     });
 
-    if (response.status === 200 && response.data.data) {
-      ElMessage.success(response.data.message || '注册成功');
+    if (response.code === 200 && response.data) {
+      ElMessage.success(response.message || '注册成功');
       // 注册成功后跳转到登录页面
-      await router.push('/login');
+      await router.push('/auth/sign-in');
     } else {
-      ElMessage.error(response.data.message || '注册失败，请稍后重试');
+      ElMessage.error(response.message || '注册失败，请稍后重试');
     }
   } catch (error) {
     console.error('注册错误:', error);
-    if (axios.isAxiosError(error) && error.response) {
-      ElMessage.error(error.response.data.message || '注册失败，请稍后重试');
-    } else {
-      ElMessage.error('注册失败，请稍后重试');
-    }
+    ElMessage.error('注册失败，请稍后重试');
   }
 };
 </script>

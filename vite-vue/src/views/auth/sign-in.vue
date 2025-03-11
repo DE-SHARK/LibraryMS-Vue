@@ -72,12 +72,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref, defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 // 导入 Element Plus 图标
 import { User, Lock, ChatDotRound } from '@element-plus/icons-vue';
+// 导入封装的 API
+import { login } from '@/api/auth';
+
+// 定义组件名称
+defineComponent({
+  name: 'SignIn'
+});
 
 // 添加 CSS Modules 类型声明
 import { useCssModule } from 'vue';
@@ -120,30 +126,26 @@ const handleSignIn = async () => {
   try {
     await signInForm.value.validate();
 
-    // 发送登录请求
-    const response = await axios.post('http://localhost:8080/api/auth/login', {
+    // 使用封装的 API 发送登录请求
+    const response = await login({
       username: formData.value.username,
       password: formData.value.password
     });
 
     // 修改这里的判断逻辑
-    if (response.status === 200 && response.data.data?.accessToken) {
+    if (response.code === 200 && response.data?.accessToken) {
       // 登录成功，存储token
-      localStorage.setItem('token', response.data.data.accessToken);
-      ElMessage.success(response.data.message || '登录成功');
+      localStorage.setItem('token', response.data.accessToken);
+      ElMessage.success(response.message || '登录成功');
 
       // 跳转到首页
       await router.push('/home');
     } else {
-      ElMessage.error(response.data.message || '登录失败，请检查用户名和密码');
+      ElMessage.error(response.message || '登录失败，请检查用户名和密码');
     }
   } catch (error) {
     console.error('登录错误:', error);
-    if (axios.isAxiosError(error) && error.response) {
-      ElMessage.error(error.response.data.message || '登录失败，请稍后重试');
-    } else {
-      ElMessage.error('登录失败，请稍后重试');
-    }
+    ElMessage.error('登录失败，请稍后重试');
   }
 };
 </script>
