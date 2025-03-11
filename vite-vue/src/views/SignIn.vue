@@ -120,7 +120,7 @@ const handleSignIn = async () => {
       ElMessage.success('登录成功');
 
       // 跳转到首页
-      router.push('/dashboard');
+      await router.push('/dashboard');
     } else {
       ElMessage.error(response.data.message || '登录失败，请检查用户名和密码');
     }
