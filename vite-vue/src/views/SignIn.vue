@@ -1,21 +1,21 @@
 <template>
-  <div class="lms-auth-container">
-    <div class="lms-auth-form-wrapper">
+  <div :class="$style.authContainer">
+    <div :class="$style.formWrapper">
       <!-- 标题 -->
-      <div class="logo-container">
-        <h1 class="logo-text">广东药科大学</h1>
-        <span class="logo-subtitle">图书馆</span>
+      <div :class="$style.logoContainer">
+        <h1 :class="$style.logoText">广东药科大学</h1>
+        <span :class="$style.logoSubtitle">图书馆</span>
       </div>
 
       <!-- 登录表单 -->
-      <div class="tabs">
-        <div class="tab active">密码登录</div>
-        <div class="tab">验证码登录</div>
+      <div :class="$style.tabs">
+        <div :class="[$style.tab, $style.active]">密码登录</div>
+        <div :class="$style.tab">验证码登录</div>
       </div>
 
-      <div class="auth-tip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
+      <div :class="$style.authTip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
 
-      <el-form ref="signInForm" :model="formData" :rules="rules" class="auth-form">
+      <el-form ref="signInForm" :model="formData" :rules="rules" :class="$style.authForm">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -34,29 +34,29 @@
           ></el-input>
         </el-form-item>
 
-        <div class="agreement">
+        <div :class="$style.agreement">
           <el-checkbox v-model="agreement">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></el-checkbox>
         </div>
 
         <el-button
             type="primary"
-            class="auth-button"
+            :class="$style.authButton"
             :disabled="!agreement"
             @click="handleSignIn"
         >登录</el-button>
 
-        <div class="actions">
-          <span class="remember-pwd">忘记密码</span>
-          <span class="register">立即注册</span>
+        <div :class="$style.actions">
+          <span :class="$style.rememberPwd">忘记密码</span>
+          <span :class="$style.register">立即注册</span>
         </div>
 
-        <div class="divider">
+        <div :class="$style.divider">
           <span>或</span>
         </div>
 
-        <div class="social-login">
-          <el-button class="wechat-login">
-            <i class="wechat-icon"></i>
+        <div :class="$style.socialLogin">
+          <el-button :class="$style.wechatLogin">
+            <i :class="$style.wechatIcon"></i>
             使用微信扫码登录
           </el-button>
         </div>
@@ -136,67 +136,6 @@ const handleSignIn = async () => {
 };
 </script>
 
-<style scoped>
-@import '../styles/auth.css';
-
-.tabs {
-  display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 0;
-  margin-right: 20px;
-  cursor: pointer;
-  position: relative;
-}
-
-.tab.active {
-  color: #000;
-  font-weight: bold;
-}
-
-.tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #000;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  font-size: 14px;
-  color: #666;
-}
-
-.remember-pwd, .register {
-  cursor: pointer;
-}
-
-.social-login {
-  margin-bottom: 20px;
-}
-
-.wechat-login {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e0e0e0;
-}
-
-.wechat-icon {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: #07C160;
-  border-radius: 4px;
-  margin-right: 8px;
-}
+<style lang="scss" module>
+@import '../assets/scss/modules/sign-in.module.scss';
 </style>

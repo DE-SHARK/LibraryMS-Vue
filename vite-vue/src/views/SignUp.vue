@@ -1,18 +1,18 @@
 <template>
-  <div class="lms-auth-container">
-    <div class="lms-auth-form-wrapper">
+  <div :class="$style.authContainer">
+    <div :class="$style.formWrapper">
       <!-- 标题 -->
-      <div class="logo-container">
-        <h1 class="logo-text">广东药科大学</h1>
-        <span class="logo-subtitle">图书馆</span>
+      <div :class="$style.logoContainer">
+        <h1 :class="$style.logoText">广东药科大学</h1>
+        <span :class="$style.logoSubtitle">图书馆</span>
       </div>
 
       <!-- 注册表单 -->
-      <div class="form-title">用户注册</div>
+      <div :class="$style.formTitle">用户注册</div>
 
-      <div class="auth-tip">请填写以下信息完成注册</div>
+      <div :class="$style.authTip">请填写以下信息完成注册</div>
 
-      <el-form ref="registerForm" :model="formData" :rules="rules" class="auth-form">
+      <el-form ref="registerForm" :model="formData" :rules="rules" :class="$style.authForm">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -50,20 +50,20 @@
           ></el-input>
         </el-form-item>
 
-        <div class="agreement">
+        <div :class="$style.agreement">
           <el-checkbox v-model="agreement">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></el-checkbox>
         </div>
 
         <el-button
             type="primary"
-            class="auth-button"
+            :class="$style.authButton"
             :disabled="!agreement"
             @click="handleRegister"
         >注册</el-button>
 
-        <div class="actions">
+        <div :class="$style.actions">
           <span>已有账号？</span>
-          <router-link to="/login" class="login-link">立即登录</router-link>
+          <router-link to="/login" :class="$style.loginLink">立即登录</router-link>
         </div>
       </el-form>
     </div>
@@ -160,25 +160,6 @@ const handleRegister = async () => {
 };
 </script>
 
-<style scoped>
-@import '../styles/auth.css';
-
-.form-title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.actions {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
-
-.login-link {
-  color: #1890ff;
-  text-decoration: none;
-  margin-left: 5px;
-}
+<style lang="scss" module>
+@import '../assets/scss/modules/sign-up.module.scss';
 </style>
