@@ -151,6 +151,9 @@ const handleSignIn = async () => {
 .logo-container {
   text-align: center;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-text {
@@ -158,16 +161,19 @@ const handleSignIn = async () => {
   font-weight: bold;
   display: inline-block;
   margin: 0 15px 0 0;
+  line-height: 1;
 }
 
 .logo-subtitle {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background-color: #333;
   color: white;
   padding: 3px 10px;
   border-radius: 4px;
   font-size: 25px;
   font-weight: 500;
+  height: 36px;
 }
 
 .tabs {
