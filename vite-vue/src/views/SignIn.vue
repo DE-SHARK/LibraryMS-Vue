@@ -15,7 +15,7 @@
 
       <div class="login-tip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
 
-      <el-form ref="signinForm" :model="formData" :rules="rules" class="login-form">
+      <el-form ref="signInForm" :model="formData" :rules="rules" class="login-form">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -95,7 +95,7 @@ const rules = {
 };
 
 const router = useRouter();
-const signinForm = ref();  // 用于表单验证
+const signInForm = ref();  // 用于表单验证
 const agreement = ref(false); // 用户协议勾选状态
 
 // 提交登录
@@ -106,7 +106,7 @@ const handleSignIn = async () => {
   }
 
   try {
-    await signinForm.value.validate();
+    await signInForm.value.validate();
 
     // 发送登录请求
     const response = await axios.post('localhost:8080/api/auth/login', {
