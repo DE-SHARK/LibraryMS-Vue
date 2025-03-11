@@ -13,9 +13,9 @@
         <div class="tab">验证码登录</div>
       </div>
 
-      <div class="login-tip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
+      <div class="auth-tip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
 
-      <el-form ref="signInForm" :model="formData" :rules="rules" class="login-form">
+      <el-form ref="signInForm" :model="formData" :rules="rules" class="auth-form">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -40,13 +40,13 @@
 
         <el-button
             type="primary"
-            class="login-button"
+            class="auth-button"
             :disabled="!agreement"
             @click="handleSignIn"
         >登录</el-button>
 
         <div class="actions">
-          <span class="remember-pwd">记住密码</span>
+          <span class="remember-pwd">忘记密码</span>
           <span class="register">立即注册</span>
         </div>
 
@@ -137,49 +137,7 @@ const handleSignIn = async () => {
 </script>
 
 <style scoped>
-.lms-auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-}
-
-.lms-auth-form-wrapper {
-  width: 400px;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.logo-container {
-  text-align: center;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: bold;
-  display: inline-block;
-  margin: 0 15px 0 0;
-  line-height: 1;
-}
-
-.logo-subtitle {
-  display: inline-flex;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 25px;
-  font-weight: 500;
-  height: 36px;
-}
+@import '../styles/auth.css';
 
 .tabs {
   display: flex;
@@ -209,35 +167,6 @@ const handleSignIn = async () => {
   background-color: #000;
 }
 
-.login-tip {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.login-form {
-  margin-bottom: 20px;
-}
-
-.agreement {
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-.agreement a {
-  color: #1890ff;
-  text-decoration: none;
-}
-
-.login-button {
-  width: 100%;
-  height: 40px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  background-color: #000;
-  border-color: #000;
-}
-
 .actions {
   display: flex;
   justify-content: space-between;
@@ -248,25 +177,6 @@ const handleSignIn = async () => {
 
 .remember-pwd, .register {
   cursor: pointer;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: #e0e0e0;
-}
-
-.divider span {
-  padding: 0 10px;
-  color: #999;
 }
 
 .social-login {
