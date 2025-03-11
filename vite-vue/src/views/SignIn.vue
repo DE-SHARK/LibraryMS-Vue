@@ -109,7 +109,7 @@ const handleSignIn = async () => {
     await signInForm.value.validate();
 
     // 发送登录请求
-    const response = await axios.post('localhost:8080/api/auth/login', {
+    const response = await axios.post('http://localhost:8080/api/auth/login', {
       username: formData.value.username,
       password: formData.value.password
     });
