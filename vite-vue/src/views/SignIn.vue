@@ -114,19 +114,24 @@ const handleSignIn = async () => {
       password: formData.value.password
     });
 
-    if (response.data.code === 200) {
+    // 修改这里的判断逻辑
+    if (response.status === 200 && response.data.data?.accessToken) {
       // 登录成功，存储token
-      localStorage.setItem('token', response.data.token);
-      ElMessage.success('登录成功');
+      localStorage.setItem('token', response.data.data.accessToken);
+      ElMessage.success(response.data.message || '登录成功');
 
       // 跳转到首页
-      await router.push('/dashboard');
+      await router.push('/home');
     } else {
       ElMessage.error(response.data.message || '登录失败，请检查用户名和密码');
     }
   } catch (error) {
     console.error('登录错误:', error);
-    ElMessage.error('登录失败，请稍后重试');
+    if (axios.isAxiosError(error) && error.response) {
+      ElMessage.error(error.response.data.message || '登录失败，请稍后重试');
+    } else {
+      ElMessage.error('登录失败，请稍后重试');
+    }
   }
 };
 </script>
