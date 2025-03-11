@@ -17,20 +17,20 @@
 
       <el-form ref="signinForm" :model="formData" :rules="rules" class="login-form">
         <el-form-item prop="username">
-          <el-input 
-            v-model="formData.username" 
-            placeholder="请输入手机号/用户名"
-            prefix-icon="el-icon-user"
+          <el-input
+              v-model="formData.username"
+              placeholder="请输入手机号/用户名"
+              prefix-icon="el-icon-user"
           ></el-input>
         </el-form-item>
-        
+
         <el-form-item prop="password">
-          <el-input 
-            v-model="formData.password" 
-            type="password" 
-            placeholder="请输入密码"
-            prefix-icon="el-icon-lock"
-            show-password
+          <el-input
+              v-model="formData.password"
+              type="password"
+              placeholder="请输入密码"
+              prefix-icon="el-icon-lock"
+              show-password
           ></el-input>
         </el-form-item>
 
@@ -38,11 +38,11 @@
           <el-checkbox v-model="agreement">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></el-checkbox>
         </div>
 
-        <el-button 
-          type="primary" 
-          class="login-button" 
-          :disabled="!agreement"
-          @click="handleSignIn"
+        <el-button
+            type="primary"
+            class="login-button"
+            :disabled="!agreement"
+            @click="handleSignIn"
         >登录</el-button>
 
         <div class="actions">
@@ -107,18 +107,18 @@ const handleSignIn = async () => {
 
   try {
     await signinForm.value.validate();
-    
+
     // 发送登录请求
     const response = await axios.post('localhost:8080/api/auth/login', {
       username: formData.value.username,
       password: formData.value.password
     });
-    
+
     if (response.data.code === 200) {
       // 登录成功，存储token
       localStorage.setItem('token', response.data.token);
       ElMessage.success('登录成功');
-      
+
       // 跳转到首页
       router.push('/dashboard');
     } else {
@@ -156,17 +156,18 @@ const handleSignIn = async () => {
 .logo-text {
   font-size: 28px;
   font-weight: bold;
-  margin: 0;
+  display: inline-block;
+  margin: 0 15px 0 0;
 }
 
 .logo-subtitle {
   display: inline-block;
   background-color: #333;
   color: white;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 4px;
-  font-size: 14px;
-  margin-left: 8px;
+  font-size: 25px;
+  font-weight: 500;
 }
 
 .tabs {
