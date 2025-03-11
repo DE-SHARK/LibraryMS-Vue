@@ -1,18 +1,18 @@
 <template>
-  <div :class="$style.authContainer">
-    <div :class="$style.formWrapper">
+  <div :class="style.authContainer">
+    <div :class="style.formWrapper">
       <!-- 标题 -->
-      <div :class="$style.logoContainer">
-        <h1 :class="$style.logoText">广东药科大学</h1>
-        <span :class="$style.logoSubtitle">图书馆</span>
+      <div :class="style.logoContainer">
+        <h1 :class="style.logoText">广东药科大学</h1>
+        <span :class="style.logoSubtitle">图书馆</span>
       </div>
 
       <!-- 注册表单 -->
-      <div :class="$style.formTitle">用户注册</div>
+      <div :class="style.formTitle">用户注册</div>
 
-      <div :class="$style.authTip">请填写以下信息完成注册</div>
+      <div :class="style.authTip">请填写以下信息完成注册</div>
 
-      <el-form ref="registerForm" :model="formData" :rules="rules" :class="$style.authForm">
+      <el-form ref="registerForm" :model="formData" :rules="rules" :class="style.authForm">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -50,20 +50,20 @@
           ></el-input>
         </el-form-item>
 
-        <div :class="$style.agreement">
+        <div :class="style.agreement">
           <el-checkbox v-model="agreement">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></el-checkbox>
         </div>
 
         <el-button
             type="primary"
-            :class="$style.authButton"
+            :class="style.authButton"
             :disabled="!agreement"
             @click="handleRegister"
         >注册</el-button>
 
-        <div :class="$style.actions">
+        <div :class="style.actions">
           <span>已有账号？</span>
-          <router-link to="/login" :class="$style.loginLink">立即登录</router-link>
+          <router-link to="/login" :class="style.loginLink">立即登录</router-link>
         </div>
       </el-form>
     </div>
@@ -75,6 +75,10 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+
+// 添加 CSS Modules 类型声明
+import { useCssModule } from 'vue';
+const style = useCssModule();
 
 // 添加类型定义
 interface FormData {
@@ -161,5 +165,5 @@ const handleRegister = async () => {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/modules/sign-up.module.scss';
+@use '../assets/scss/modules/sign-up.module.scss';
 </style>

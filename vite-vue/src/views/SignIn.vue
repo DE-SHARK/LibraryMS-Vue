@@ -1,21 +1,21 @@
 <template>
-  <div :class="$style.authContainer">
-    <div :class="$style.formWrapper">
+  <div :class="style.authContainer">
+    <div :class="style.formWrapper">
       <!-- 标题 -->
-      <div :class="$style.logoContainer">
-        <h1 :class="$style.logoText">广东药科大学</h1>
-        <span :class="$style.logoSubtitle">图书馆</span>
+      <div :class="style.logoContainer">
+        <h1 :class="style.logoText">广东药科大学</h1>
+        <span :class="style.logoSubtitle">图书馆</span>
       </div>
 
       <!-- 登录表单 -->
-      <div :class="$style.tabs">
-        <div :class="[$style.tab, $style.active]">密码登录</div>
-        <div :class="$style.tab">验证码登录</div>
+      <div :class="style.tabs">
+        <div :class="[style.tab, style.active]">密码登录</div>
+        <div :class="style.tab">验证码登录</div>
       </div>
 
-      <div :class="$style.authTip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
+      <div :class="style.authTip">您可在此区域使用 手机号 / 微信 / 用户名 登录</div>
 
-      <el-form ref="signInForm" :model="formData" :rules="rules" :class="$style.authForm">
+      <el-form ref="signInForm" :model="formData" :rules="rules" :class="style.authForm">
         <el-form-item prop="username">
           <el-input
               v-model="formData.username"
@@ -34,29 +34,29 @@
           ></el-input>
         </el-form-item>
 
-        <div :class="$style.agreement">
+        <div :class="style.agreement">
           <el-checkbox v-model="agreement">我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私政策</a></el-checkbox>
         </div>
 
         <el-button
             type="primary"
-            :class="$style.authButton"
+            :class="style.authButton"
             :disabled="!agreement"
             @click="handleSignIn"
         >登录</el-button>
 
-        <div :class="$style.actions">
-          <span :class="$style.rememberPwd">忘记密码</span>
-          <span :class="$style.register">立即注册</span>
+        <div :class="style.actions">
+          <span :class="style.rememberPwd">忘记密码</span>
+          <span :class="style.register">立即注册</span>
         </div>
 
-        <div :class="$style.divider">
+        <div :class="style.divider">
           <span>或</span>
         </div>
 
-        <div :class="$style.socialLogin">
-          <el-button :class="$style.wechatLogin">
-            <i :class="$style.wechatIcon"></i>
+        <div :class="style.socialLogin">
+          <el-button :class="style.wechatLogin">
+            <i :class="style.wechatIcon"></i>
             使用微信扫码登录
           </el-button>
         </div>
@@ -70,6 +70,10 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+
+// 添加 CSS Modules 类型声明
+import { useCssModule } from 'vue';
+const style = useCssModule();
 
 // 添加类型定义
 interface FormData {
@@ -137,5 +141,5 @@ const handleSignIn = async () => {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/modules/sign-in.module.scss';
+@use '../assets/scss/modules/sign-in.module.scss';
 </style>
