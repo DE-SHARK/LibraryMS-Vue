@@ -1,5 +1,5 @@
-@use '../global' as *;
-@use './_auth-base.module.scss';
+@use '../../assets/scss/global/index' as *;
+@use 'auth-base.module';
 
 // 注册特有的样式
 .formTitle {

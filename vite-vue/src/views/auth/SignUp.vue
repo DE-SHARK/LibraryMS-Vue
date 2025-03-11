@@ -179,5 +179,6 @@ const handleRegister = async () => {
 </script>
 
 <style lang="scss" module>
-@use '../assets/scss/modules/sign-up.module.scss';
+// 修改样式引用方式，使用与组件同名的样式文件
+@use './sign-up.module.scss';
 </style>

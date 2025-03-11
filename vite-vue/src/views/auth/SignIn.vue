@@ -149,5 +149,6 @@ const handleSignIn = async () => {
 </script>
 
 <style lang="scss" module>
-@use '../assets/scss/modules/sign-in.module.scss';
+// 修改样式引用方式，使用与组件同名的样式文件
+@use './sign-in.module.scss';
 </style>
