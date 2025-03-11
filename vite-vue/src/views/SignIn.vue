@@ -20,8 +20,11 @@
           <el-input
               v-model="formData.username"
               placeholder="请输入手机号/用户名"
-              prefix-icon="el-icon-user"
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><User /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="password">
@@ -29,9 +32,12 @@
               v-model="formData.password"
               type="password"
               placeholder="请输入密码"
-              prefix-icon="el-icon-lock"
               show-password
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><Lock /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <div :class="style.agreement">
@@ -56,7 +62,7 @@
 
         <div :class="style.socialLogin">
           <el-button :class="style.wechatLogin">
-            <i :class="style.wechatIcon"></i>
+            <el-icon><ChatDotRound /></el-icon>
             使用微信扫码登录
           </el-button>
         </div>
@@ -70,6 +76,8 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+// 导入 Element Plus 图标
+import { User, Lock, ChatDotRound } from '@element-plus/icons-vue';
 
 // 添加 CSS Modules 类型声明
 import { useCssModule } from 'vue';
