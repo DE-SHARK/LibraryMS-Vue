@@ -17,8 +17,11 @@
           <el-input
               v-model="formData.username"
               placeholder="请输入用户名"
-              prefix-icon="el-icon-user"
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><User /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="email">
@@ -26,8 +29,11 @@
               v-model="formData.email"
               type="email"
               placeholder="请输入邮箱"
-              prefix-icon="el-icon-message"
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><Message /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="password">
@@ -35,9 +41,12 @@
               v-model="formData.password"
               type="password"
               placeholder="请输入密码"
-              prefix-icon="el-icon-lock"
               show-password
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><Lock /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="confirmPassword">
@@ -45,9 +54,12 @@
               v-model="formData.confirmPassword"
               type="password"
               placeholder="请确认密码"
-              prefix-icon="el-icon-lock"
               show-password
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon><Lock /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
 
         <div :class="style.agreement">
@@ -75,6 +87,8 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+// 导入 Element Plus 图标
+import { User, Message, Lock } from '@element-plus/icons-vue';
 
 // 添加 CSS Modules 类型声明
 import { useCssModule } from 'vue';
