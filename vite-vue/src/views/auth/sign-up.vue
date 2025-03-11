@@ -75,7 +75,7 @@
 
         <div :class="style.actions">
           <span>已有账号？</span>
-          <router-link to="/login" :class="style.loginLink">立即登录</router-link>
+          <router-link to="/auth/sign-in" :class="style.loginLink">立即登录</router-link>
         </div>
       </el-form>
     </div>
