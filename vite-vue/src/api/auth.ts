@@ -3,22 +3,15 @@ import type { AxiosResponse } from 'axios'
 
 // 定义接口返回数据类型
 interface ApiResponse<T> {
-  code: number
-  message: string
-  data: T
+  message?: string
+  error?: string
+  data?: T
+  timestamp?: string
 }
 
 // 登录接口返回数据类型
 interface LoginResponse {
   accessToken: string
-  userId: string
-  username: string
-}
-
-// 注册接口返回数据类型
-interface RegisterResponse {
-  userId: string
-  username: string
 }
 
 // 登录参数类型
@@ -46,7 +39,7 @@ const apiClient = axios.create({
 /**
  * 用户登录
  * @param params 登录参数
- * @returns Promise<LoginResponse>
+ * @returns Promise<ApiResponse<LoginResponse>>
  */
 export const login = (params: LoginParams): Promise<ApiResponse<LoginResponse>> => {
   return apiClient.post('/auth/login', params)
@@ -56,9 +49,9 @@ export const login = (params: LoginParams): Promise<ApiResponse<LoginResponse>> 
 /**
  * 用户注册
  * @param params 注册参数
- * @returns Promise<RegisterResponse>
+ * @returns Promise<ApiResponse<void>>
  */
-export const register = (params: RegisterParams): Promise<ApiResponse<RegisterResponse>> => {
+export const register = (params: RegisterParams): Promise<ApiResponse<void>> => {
   return apiClient.post('/auth/register', params)
-    .then((response: AxiosResponse<ApiResponse<RegisterResponse>>) => response.data)
+    .then((response: AxiosResponse<ApiResponse<void>>) => response.data)
 }
