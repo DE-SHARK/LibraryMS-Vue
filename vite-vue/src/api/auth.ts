@@ -161,8 +161,9 @@ export const register = (params: RegisterParams): Promise<ApiResponse<void>> => 
 export const logout = (): Promise<ApiResponse<void>> => {
   return apiClient.post('/auth/logout')
     .then((response: AxiosResponse<ApiResponse<void>>) => {
-      // 清除令牌
+      // 清除令牌和用户信息
       tokenService.clearToken()
+      localStorage.removeItem('userInfo')
       return response.data
     })
 }
@@ -182,3 +183,67 @@ export const refreshToken = (): Promise<ApiResponse<AuthToken>> => {
 }
 
 export { tokenService }
+
+// 用户信息接口
+interface UserInfo {
+  username: string;
+  email?: string;
+  avatar?: string;
+  // 可以根据需要添加更多字段
+}
+
+/**
+ * 获取当前登录用户信息
+ * @returns Promise<ApiResponse<UserInfo>>
+ */
+export const getCurrentUser = (): Promise<ApiResponse<UserInfo>> => {
+  // 先尝试从本地存储获取用户信息
+  const cachedUserInfo = localStorage.getItem('userInfo')
+  
+  if (cachedUserInfo) {
+    // 如果本地有缓存的用户信息，直接返回
+    return Promise.resolve({
+      data: JSON.parse(cachedUserInfo),
+      message: '从缓存获取用户信息成功'
+    })
+  }
+  
+  // 如果本地没有缓存，尝试从token中解析
+  const token = tokenService.getToken()
+  
+  if (token) {
+    try {
+      // 解析JWT令牌（令牌格式：header.payload.signature）
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const payload = JSON.parse(window.atob(base64))
+      
+      // 从payload中提取用户信息
+      const userInfo: UserInfo = {
+        username: payload.username || payload.sub || '用户',
+        email: payload.email,
+        avatar: payload.avatar || '/src/assets/avatar.svg'
+      }
+      
+      // 将解析出的用户信息存入本地存储
+      localStorage.setItem('userInfo', JSON.stringify(userInfo))
+      
+      return Promise.resolve({
+        data: userInfo,
+        message: '从令牌解析用户信息成功'
+      })
+    } catch (error) {
+      console.error('解析令牌失败:', error)
+    }
+  }
+  
+  // 如果本地存储和令牌都无法获取用户信息，则调用API
+  return apiClient.get('/auth/current-user')
+    .then((response: AxiosResponse<ApiResponse<UserInfo>>) => {
+      // 将API返回的用户信息存入本地存储
+      if (response.data.data) {
+        localStorage.setItem('userInfo', JSON.stringify(response.data.data))
+      }
+      return response.data
+    })
+}

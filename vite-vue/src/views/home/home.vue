@@ -184,6 +184,9 @@ import { Search, ArrowDown, Reading, Calendar, Document, Collection } from '@ele
 import { useCssModule } from 'vue';
 import { ElNotification, ElMessage } from 'element-plus';
 
+// 导入atuh函数
+import { logout, getCurrentUser } from '../../api/auth';
+
 // 定义组件名称
 defineComponent({
   name: 'Home'
@@ -196,8 +199,25 @@ const style = useCssModule();
 const router = useRouter();
 
 // 用户信息
-const userName = ref('张同学');
+const userName = ref('加载中...');
 const userAvatar = ref('/src/assets/avatar.svg');
+
+// 获取用户信息
+const fetchUserInfo = async () => {
+  try {
+    const response = await getCurrentUser();
+    if (response.data) {
+      userName.value = response.data.username;
+      // 如果后端返回了头像URL，则使用后端返回的头像
+      if (response.data.avatar) {
+        userAvatar.value = response.data.avatar;
+      }
+    }
+  } catch (error) {
+    console.error('获取用户信息失败:', error);
+    ElMessage.error('获取用户信息失败');
+  }
+};
 
 // 搜索相关
 const searchKeyword = ref('');
@@ -287,6 +307,9 @@ const notices = ref([
 
 // 生命周期钩子
 onMounted(() => {
+  // 获取用户信息
+  fetchUserInfo();
+  
   // 显示欢迎通知
   ElNotification({
     title: '欢迎访问广东药科大学图书馆',
@@ -311,8 +334,6 @@ const handleSearch = () => {
   }
 };
 
-// 导入登出函数
-import { logout } from '../../api/auth';
 
 const handleLogout = async () => {
   try {
