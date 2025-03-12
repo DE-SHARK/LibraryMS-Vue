@@ -311,9 +311,18 @@ const handleSearch = () => {
   }
 };
 
-const handleLogout = () => {
-  // 实际项目中这里会调用登出API
-  router.push('/auth/sign-in');
+// 导入登出函数
+import { logout } from '../../api/auth';
+
+const handleLogout = async () => {
+  try {
+    await logout();
+    ElMessage.success('已成功退出登录');
+    router.push('/auth/sign-in');
+  } catch (error) {
+    console.error('登出错误:', error);
+    ElMessage.error('登出失败，请稍后重试');
+  }
 };
 
 </script>

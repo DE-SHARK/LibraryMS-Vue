@@ -82,7 +82,7 @@ import { ElMessage } from 'element-plus';
 import { User, Lock, ChatDotRound } from '@element-plus/icons-vue';
 
 // API 导入
-import { login } from '@/api/auth';
+import { login } from '../../api/auth';
 
 // 定义组件名称
 defineComponent({
@@ -135,8 +135,7 @@ const handleSignIn = async () => {
       password: formData.value.password
     });
 
-    // 登录成功，存储token
-    localStorage.setItem('token', response.data.accessToken);
+    // 登录成功，token已在login函数中保存
     ElMessage.success(response.message || '登录成功');
 
     // 跳转到首页
