@@ -135,20 +135,28 @@ const handleSignIn = async () => {
       password: formData.value.password
     });
 
-    // 修改这里的判断逻辑
-    if (response.code === 200 && response.data?.accessToken) {
-      // 登录成功，存储token
-      localStorage.setItem('token', response.data.accessToken);
-      ElMessage.success(response.message || '登录成功');
+    // 登录成功，存储token
+    localStorage.setItem('token', response.data.accessToken);
+    ElMessage.success(response.message || '登录成功');
 
-      // 跳转到首页
-      await router.push('/home');
-    } else {
-      ElMessage.error(response.message || '登录失败，请检查用户名和密码');
-    }
-  } catch (error) {
+    // 跳转到首页
+    await router.push('/home');
+  } catch (error: any) {
     console.error('登录错误:', error);
-    ElMessage.error('登录失败，请稍后重试');
+    
+    // 根据错误状态码提供更具体的错误信息
+    if (error.response) {
+      const status = error.response.status;
+      if (status === 400) {
+        ElMessage.error('请求参数错误，请检查输入');
+      } else if (status === 401) {
+        ElMessage.error('用户名或密码错误');
+      } else {
+        ElMessage.error(error.response.data?.message || '登录失败，请稍后重试');
+      }
+    } else {
+      ElMessage.error('网络错误，请检查网络连接');
+    }
   }
 };
 </script>
