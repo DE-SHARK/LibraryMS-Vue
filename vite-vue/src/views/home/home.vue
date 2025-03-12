@@ -182,7 +182,7 @@ import { ref, defineComponent, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { Search, ArrowDown, Reading, Calendar, Document, Collection } from '@element-plus/icons-vue';
 import { useCssModule } from 'vue';
-import { ElNotification } from 'element-plus';
+import { ElNotification, ElMessage } from 'element-plus';
 
 // 定义组件名称
 defineComponent({

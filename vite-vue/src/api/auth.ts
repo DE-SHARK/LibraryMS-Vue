@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosResponse, AxiosRequestConfig, AxiosInstance, AxiosError } from 'axios'
+import type { AxiosResponse, InternalAxiosRequestConfig, AxiosInstance, AxiosError } from 'axios'
 import tokenService from '../utils/token-service'
 
 // 定义接口返回数据类型
@@ -40,7 +40,7 @@ const apiClient: AxiosInstance = axios.create({
 
 // 请求拦截器 - 添加认证令牌
 apiClient.interceptors.request.use(
-  (config: AxiosRequestConfig): AxiosRequestConfig => {
+  (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const token = tokenService.getToken()
     if (token && config.headers) {
       config.headers['Authorization'] = `Bearer ${token}`
