@@ -1,0 +1,393 @@
+@use '@/assets/scss/global/index' as *;
+
+// 颜色变量
+$primary-color: #3f51b5; // 更新为蓝紫色，更符合图书馆知识氛围
+$secondary-color: #7986cb; // 次要颜色
+$accent-color: #ff4081; // 强调色
+$primary-bg: #f5f7fa; // 更柔和的背景色
+$white: #fff;
+$gray-light: #e0e0e0;
+$gray: #999;
+$gray-dark: #666;
+$link-color: #3f51b5; // 与主色调一致
+
+// 搜索结果容器
+.searchResultsContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// 顶部导航栏 - 与主页保持一致
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-medium;
+  background-color: $white;
+  box-shadow: $box-shadow;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  margin-right: $spacing-medium;
+}
+
+.logoText {
+  h1 {
+    margin: 0;
+    font-size: $font-size-large;
+    color: $primary-color;
+  }
+  
+  p {
+    margin: 0;
+    font-size: $font-size-small;
+    color: $gray-dark;
+  }
+}
+
+.navLinks {
+  flex: 1;
+  margin: 0 $spacing-large;
+  
+  .menu {
+    border-bottom: none;
+  }
+}
+
+.userArea {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  
+  span {
+    margin: 0 $spacing-small;
+  }
+}
+
+// 主要内容区域
+.mainContent {
+  flex: 1;
+  background-color: $primary-bg;
+  padding-bottom: $spacing-large;
+}
+
+// 搜索区域 - 简化版本
+.searchSection {
+  background: linear-gradient(135deg, #1a237e, #3f51b5);
+  color: $white;
+  padding: $spacing-large 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><rect fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" x="25" y="25" width="50" height="50" rx="10" ry="10" transform="rotate(45,50,50)"/></svg>') repeat;
+    opacity: 0.3;
+    z-index: 0;
+  }
+}
+
+.searchBox {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 $spacing-medium;
+  position: relative;
+  z-index: 1;
+  
+  h2 {
+    font-size: $font-size-large;
+    margin-bottom: $spacing-medium;
+  }
+}
+
+.searchInput {
+  display: flex;
+  
+  :global(.el-input) {
+    flex: 1;
+  }
+  
+  :global(.el-button) {
+    margin-left: $spacing-small;
+  }
+}
+
+// 搜索结果区域
+.resultsSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-medium;
+}
+
+.resultsHeader {
+  margin-bottom: $spacing-large;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: $spacing-medium;
+  font-size: $font-size-large;
+  position: relative;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: $primary-color;
+    margin: $spacing-small auto 0;
+  }
+}
+
+.resultsInfo {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $spacing-medium;
+  color: $gray-dark;
+  
+  span {
+    strong {
+      color: $primary-color;
+    }
+  }
+}
+
+// 加载中
+.loadingContainer {
+  padding: $spacing-large;
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+}
+
+// 空结果
+.emptyResults {
+  padding: $spacing-xlarge;
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+  text-align: center;
+}
+
+// 图书列表
+.bookList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-medium;
+}
+
+.bookItem {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: $box-shadow-light;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $box-shadow;
+  }
+}
+
+.bookContent {
+  display: flex;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.bookCover {
+  flex: 0 0 150px;
+  padding: $spacing-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+  }
+}
+
+.coverImage {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.bookDetails {
+  flex: 1;
+  padding: $spacing-medium;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookTitle {
+  margin-top: 0;
+  margin-bottom: $spacing-small;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.bookAuthor,
+.bookPublisher,
+.bookYear,
+.bookIsbn {
+  margin: $spacing-small 0;
+  color: $gray-dark;
+}
+
+.bookDescription {
+  margin: $spacing-medium 0;
+  color: $gray-dark;
+  @include multi-line-ellipsis(3);
+  line-height: 1.6;
+}
+
+.bookActions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $spacing-small;
+}
+
+.actionButtons {
+  display: flex;
+  gap: $spacing-small;
+}
+
+// 分页
+.pagination {
+  margin-top: $spacing-large;
+  display: flex;
+  justify-content: center;
+}
+
+// 页脚 - 与主页保持一致
+.footer {
+  background-color: #2c3e50;
+  color: $white;
+  padding: $spacing-large $spacing-medium;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, $primary-color, $secondary-color, $accent-color);
+  }
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-large;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerSection {
+  h3 {
+    margin-top: 0;
+    margin-bottom: $spacing-medium;
+    position: relative;
+    padding-bottom: $spacing-small;
+    color: $secondary-color;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: $accent-color;
+    }
+  }
+  
+  p {
+    margin: $spacing-small 0;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    transition: all 0.3s ease;
+    
+    a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: $accent-color;
+        text-decoration: none;
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+.copyright {
+  text-align: center;
+  margin-top: $spacing-large;
+  padding-top: $spacing-medium;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .navLinks {
+    margin: $spacing-medium 0;
+    width: 100%;
+  }
+  
+  .userArea {
+    align-self: flex-end;
+  }
+  
+  .searchInput {
+    flex-direction: column;
+    
+    :global(.el-button) {
+      margin-left: 0;
+      margin-top: $spacing-small;
+    }
+  }
+}

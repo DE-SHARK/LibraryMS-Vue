@@ -322,16 +322,27 @@ onMounted(() => {
 
 // 方法
 const handleSearch = () => {
-  console.log('搜索关键词:', searchKeyword.value, '类型:', searchType.value);
-  // 实际项目中这里会调用API进行搜索
-  if (searchKeyword.value) {
-    ElNotification({
-      title: '搜索提示',
-      message: `正在搜索${searchType.value === 'title' ? '书名' : searchType.value === 'author' ? '作者' : '主题'}：${searchKeyword.value}`,
-      type: 'info',
-      duration: 3000
-    });
+  if (!searchKeyword.value.trim()) {
+    ElMessage.warning('请输入搜索关键词');
+    return;
   }
+  
+  // 显示搜索提示
+  ElNotification({
+    title: '搜索提示',
+    message: `正在搜索${searchType.value === 'title' ? '书名' : searchType.value === 'author' ? '作者' : '主题'}：${searchKeyword.value}`,
+    type: 'info',
+    duration: 3000
+  });
+  
+  // 跳转到搜索结果页面，并传递搜索参数
+  router.push({
+    name: 'SearchResults',
+    query: {
+      keyword: searchKeyword.value,
+      type: searchType.value
+    }
+  });
 };
 
 
