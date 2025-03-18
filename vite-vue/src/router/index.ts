@@ -25,6 +25,12 @@ const router = createRouter({
       name: 'Home',
       component: () => import('../views/home/home.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/book/search-results',
+      name: 'SearchResults',
+      component: () => import('../views/book/search-results.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })
