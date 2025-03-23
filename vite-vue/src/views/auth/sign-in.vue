@@ -82,7 +82,7 @@ import { ElMessage } from 'element-plus';
 import { User, Lock, ChatDotRound } from '@element-plus/icons-vue';
 
 // API 导入
-import { login } from '../../api/auth';
+import { login } from '@/api/auth';
 
 // 定义组件名称
 defineComponent({
