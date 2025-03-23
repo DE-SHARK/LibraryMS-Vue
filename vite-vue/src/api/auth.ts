@@ -159,13 +159,16 @@ export const register = (params: RegisterParams): Promise<ApiResponse<void>> => 
  * @returns Promise<ApiResponse<void>>
  */
 export const logout = (): Promise<ApiResponse<void>> => {
-  return apiClient.post('/auth/logout')
-    .then((response: AxiosResponse<ApiResponse<void>>) => {
-      // 清除令牌和用户信息
-      tokenService.clearToken()
-      localStorage.removeItem('userInfo')
-      return response.data
-    })
+  // 清除令牌和用户信息
+  tokenService.clearToken()
+  localStorage.removeItem('userInfo')
+
+  // 直接返回成功的响应对象
+  return Promise.resolve({
+    success: true,
+    data: undefined,
+    message: '登出成功'
+  })
 }
 
 /**
