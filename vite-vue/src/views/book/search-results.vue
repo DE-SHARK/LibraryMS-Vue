@@ -171,8 +171,8 @@ import { useCssModule } from 'vue';
 import { ElNotification, ElMessage } from 'element-plus';
 
 // 导入API函数
-import { logout, getCurrentUser } from '../../api/auth';
-import { searchBooks, type Book, type BookSearchParams } from '../../api/books';
+import { logout, getCurrentUser } from '@/api/auth';
+import { searchBooks, type Book, type BookSearchParams } from '@/api/books';
 
 // 定义组件名称
 defineComponent({
@@ -269,13 +269,73 @@ const handleSearch = () => {
     ElMessage.warning('请输入搜索关键词');
     return;
   }
-  
-  // 重置页码
+
+  // 重置分页
   currentPage.value = 1;
-  
-  // 更新URL参数
+
+  // 更新路由参数，保持URL与搜索状态同步
   router.push({
-    name: 'SearchResults',
+    path: '/book/search-results',
     query: {
       keyword: searchKeyword.value,
       type: searchType.value
+    }
+  });
+
+  // 执行搜索
+  fetchBooks();
+};
+
+// 处理每页显示数量变化
+const handleSizeChange = (newSize: number) => {
+  pageSize.value = newSize;
+  fetchBooks();
+};
+
+// 处理页码变化
+const handleCurrentChange = (newPage: number) => {
+  currentPage.value = newPage;
+  fetchBooks();
+};
+
+// 处理退出登录
+const handleLogout = async () => {
+  try {
+    await logout();
+    ElMessage.success('退出登录成功');
+    router.push('/login');
+  } catch (error) {
+    console.error('退出登录失败:', error);
+    ElMessage.error('退出登录失败，请重试');
+  }
+};
+
+// 监听路由参数变化
+watch(
+    () => route.query,
+    (newQuery) => {
+      if (newQuery.keyword !== undefined) {
+        searchKeyword.value = newQuery.keyword as string;
+      }
+      if (newQuery.type !== undefined) {
+        searchType.value = newQuery.type as string;
+      }
+      fetchBooks();
+    },
+    { immediate: false, deep: true }
+);
+
+// 组件挂载时执行
+onMounted(() => {
+  // 获取用户信息
+  fetchUserInfo();
+
+  // 如果URL中有搜索参数，则执行搜索
+  if (searchKeyword.value) {
+    fetchBooks();
+  } else {
+    loading.value = false;
+  }
+});
+
+</script>
