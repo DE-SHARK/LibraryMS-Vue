@@ -339,3 +339,7 @@ onMounted(() => {
 });
 
 </script>
+
+<style lang="scss" module>
+@use './search-results.module.scss';
+</style>
