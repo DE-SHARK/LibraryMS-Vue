@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { AxiosResponse } from 'axios'
-import { apiClient } from './auth'
+import { apiClient } from '@/api/auth'
 
 // 定义图书接口数据类型
 export interface Book {

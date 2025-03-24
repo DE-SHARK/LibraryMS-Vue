@@ -336,6 +336,7 @@ const handleSearch = () => {
   });
   
   // 跳转到搜索结果页面，并传递搜索参数
+  console.log('正在跳转');
   router.push({
     name: 'SearchResults',
     query: {

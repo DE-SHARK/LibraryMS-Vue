@@ -38,6 +38,9 @@ const apiClient: AxiosInstance = axios.create({
   withCredentials: true // 允许跨域请求携带cookie
 })
 
+// 导出apiClient以供其他模块使用
+export { apiClient };
+
 // 请求拦截器 - 添加认证令牌
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
