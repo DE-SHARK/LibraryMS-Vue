@@ -242,19 +242,16 @@ const fetchBooks = async () => {
     };
     
     const response = await searchBooks(params);
-
-    console.info("搜索结果如下：" + response);
     
-    if (response?.data?.data?.records) {
-      // 修改数据解析方式
-      books.value = response.data.data.records;
-      totalItems.value = response.data.data.total;
-      totalPages.value = response.data.data.pages;
-      currentPage.value = response.data.data.current;
+    if (response?.data?.records) {
+      books.value = response.data.records;
+      totalItems.value = response.data.total;
+      totalPages.value = response.data.pages;
+      currentPage.value = response.data.current;
     } else {
       books.value = [];
       totalItems.value = 0;
-      ElMessage.warning(response.message || '未找到相关图书');
+      ElMessage.warning('未找到相关图书');
     }
   } catch (error) {
     console.error('搜索图书失败:', error);
