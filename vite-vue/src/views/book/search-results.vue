@@ -242,12 +242,15 @@ const fetchBooks = async () => {
     };
     
     const response = await searchBooks(params);
+
+    console.info("搜索结果如下：" + response);
     
-    if (response.data) {
-      books.value = response.data.data;
-      totalItems.value = response.data.totalItems;
-      totalPages.value = response.data.totalPages;
-      currentPage.value = response.data.currentPage;
+    if (response?.data?.data?.records) {
+      // 修改数据解析方式
+      books.value = response.data.data.records;
+      totalItems.value = response.data.data.total;
+      totalPages.value = response.data.data.pages;
+      currentPage.value = response.data.data.current;
     } else {
       books.value = [];
       totalItems.value = 0;

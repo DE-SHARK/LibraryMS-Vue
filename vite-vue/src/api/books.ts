@@ -1,33 +1,36 @@
-import axios from 'axios'
 import type { AxiosResponse } from 'axios'
 import { apiClient } from '@/api/auth'
+
+// 定义接口返回数据类型
+interface ApiResponse<T> {
+  message?: string
+  error?: string
+  data?: T
+  timestamp?: string
+}
 
 // 定义图书接口数据类型
 export interface Book {
   isbn: string
   title: string
   author: string
-  publisher: string | null
-  publishYear: number
-  description: string | null
-  coverImage: string | null
-  availableCopies: number
+  publisher?: string
+  publishYear?: number
+  description?: string
+  coverImage?: string
+  availableCopies?: number
 }
 
 // 定义搜索结果接口
 export interface BookSearchResult {
-  data: Book[]
-  currentPage: number
-  totalPages: number
-  totalItems: number
-}
-
-// 定义API响应接口
-export interface ApiResponse<T> {
-  message?: string
-  error?: string
-  data?: T
-  timestamp?: string
+  data: {
+    current: number
+    size: number
+    total: number
+    pages: number
+    records: Book[]
+    offset: number
+  }
 }
 
 // 定义搜索参数接口
