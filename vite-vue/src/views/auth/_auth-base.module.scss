@@ -1,18 +1,43 @@
-@use '../../assets/scss/global/index' as *;
+@use '@/assets/scss/global/index' as *;
+
+// 定义明暗模式的颜色变量
+:root {
+  // 明亮模式默认值
+  --primary-bg: #{$primary-bg};
+  --white: #{$white};
+  --gray-dark: #{$gray-dark};
+  --primary-color: #{$primary-color};
+  --link-color: #{$link-color};
+  --text-color: #333;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+// 深色模式变量
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-bg: #1a1a1a;
+    --white: #2d2d2d;
+    --gray-dark: #a0a0a0;
+    --primary-color: #{$primary-color}; // 可保持不变或调整
+    --link-color: #66b3ff;
+    --text-color: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+  }
+}
 
 // 共享的基础样式
 .authContainer {
   @include flex-center;
   height: 100vh;
-  background-color: $primary-bg;
+  background-color: var(--primary-bg);
 }
 
 .formWrapper {
   width: 400px;
   padding: $spacing-xlarge;
-  background-color: $white;
+  background-color: var(--white);
   border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 .logoContainer {
@@ -26,13 +51,13 @@
   font-weight: bold;
   display: inline-block;
   margin: 0 15px 0 0;
-  line-height: 1;
+  line-height: 1;color: var(--text-color);
 }
 
 .logoSubtitle {
   display: inline-flex;
   align-items: center;
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   color: $white;
   padding: 3px 10px;
   border-radius: $border-radius-small;
@@ -43,7 +68,7 @@
 
 .authTip {
   font-size: $font-size-small;
-  color: $gray-dark;
+  color: var(--gray-dark);
   margin-bottom: $spacing-medium;
   text-align: left;
 }
@@ -55,9 +80,10 @@
 .agreement {
   margin-bottom: $spacing-medium;
   font-size: $font-size-small;
+  color: var(--text-color);
 
   a {
-    color: $link-color;
+    color: var(--link-color);
     text-decoration: none;
   }
 }
@@ -67,6 +93,7 @@
   height: 40px;
   border-radius: $border-radius-small;
   margin-bottom: $spacing-medium;
-  background-color: $primary-color;
-  border-color: $primary-color;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: $white; // 确保按钮文字在深色模式下可见
 }
