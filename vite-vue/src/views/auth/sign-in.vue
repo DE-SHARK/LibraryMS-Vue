@@ -53,7 +53,7 @@
 
         <div :class="style.actions">
           <span :class="style.rememberPwd">忘记密码</span>
-          <span :class="style.register">立即注册</span>
+          <span :class="style.register" @click="handleRegister">立即注册</span>
         </div>
 
         <div :class="style.divider">
@@ -157,6 +157,11 @@ const handleSignIn = async () => {
       ElMessage.error('网络错误，请检查网络连接');
     }
   }
+};
+
+// 添加注册跳转方法
+const handleRegister = () => {
+  router.push('/auth/sign-up');
 };
 </script>
 
