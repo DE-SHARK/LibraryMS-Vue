@@ -1,0 +1,44 @@
+// 页脚样式
+.footer {
+  background-color: #f5f5f5;
+  padding: 30px 0;
+  margin-top: 40px;
+
+  .footerContent {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .footerSection {
+      h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin: 8px 0;
+        font-size: 14px;
+        color: #666;
+      }
+
+      a {
+        color: #409eff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #999;
+    font-size: 14px;
+  }
+}

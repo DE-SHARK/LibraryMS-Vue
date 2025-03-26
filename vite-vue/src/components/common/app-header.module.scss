@@ -1,0 +1,54 @@
+// 头部样式
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .logoArea {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logoText {
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 12px;
+        margin: 0;
+        color: #666;
+      }
+    }
+  }
+
+  .navLinks {
+    flex: 1;
+    margin: 0 20px;
+
+    .menu {
+      border-bottom: none;
+    }
+  }
+
+  .userArea {
+    .userInfo {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        margin: 0 5px;
+      }
+    }
+  }
+}
