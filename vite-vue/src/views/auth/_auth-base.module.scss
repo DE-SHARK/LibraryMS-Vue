@@ -1,4 +1,6 @@
-@use '@/assets/scss/global/index' as *;
+@use '@/assets/scss/global/index' as * with (
+  $primary-color: #000 // 仅在登录页使用黑色主色调
+);
 
 // 定义明暗模式的颜色变量
 :root {

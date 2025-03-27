@@ -1,17 +1,5 @@
 @use '@/assets/scss/global/index' as *;
 
-// 颜色变量
-$primary-color: #3f51b5; // 更新为蓝紫色，更符合图书馆知识氛围
-$secondary-color: #7986cb; // 次要颜色
-$accent-color: #ff4081; // 强调色
-$primary-bg: #f5f7fa; // 更柔和的背景色
-$white: #fff;
-$gray-light: #e0e0e0;
-$gray: #999;
-$gray-dark: #666;
-$link-color: #3f51b5; // 与主色调一致
-$box-shadow-light: #f5f7fa;
-
 // 搜索结果容器
 .searchResultsContainer {
   display: flex;
