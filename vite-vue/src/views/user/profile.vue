@@ -8,7 +8,7 @@ import type { UserDetailInfo } from '@/api/user'
 
 interface UserInfo extends UserDetailInfo {
   avatar: string
-  phone: string
+  phone?: string
   borrowedCount: number
   reservedCount: number
   overdueCount: number
@@ -26,7 +26,7 @@ const userInfo = ref<UserInfo>({
   major: '',
   studentId: '',
   grade: '',
-  admissionYear: 2020,
+  admissionYear: 0,
   className: '',
   degreeType: '',
   avatar: '/src/assets/avatar.svg',
@@ -62,25 +62,51 @@ const securityForm = reactive({
 // 获取用户信息
 const fetchUserInfo = async () => {
   try {
+    console.group('获取用户信息流程')
+    console.log('开始获取用户信息...')
+    
     const res = await getUserInfo()
+    console.log('原始API响应:', JSON.parse(JSON.stringify(res)))
+    
     if (res.data) {
-      // 合并API返回的数据和本地默认数据
+      console.log('解析到的用户数据:', JSON.parse(JSON.stringify(res.data)))
+      
+      // 处理异常数据
+      const sanitizedData = {
+        ...res.data,
+        college: res.data.college && !res.data.college.includes('ACTIVE') ? res.data.college : '未知学院',
+        major: res.data.major && !res.data.major.match(/\d{4}-\d{2}-\d{2}/) ? res.data.major : '未知专业',
+        studentId: res.data.studentId || '未分配',
+        grade: res.data.grade || '未知年级',
+        admissionYear: res.data.admissionYear || new Date().getFullYear(),
+        className: res.data.className || '未知班级',
+        degreeType: res.data.degreeType || '未知学历'
+      }
+      
+      console.log('处理后的用户数据:', sanitizedData)
+      
+      // 合并数据
       userInfo.value = {
         ...userInfo.value,
-        ...res.data,
-        // 保留模拟数据
+        ...sanitizedData,
         borrowedCount: 2,
         reservedCount: 1,
         overdueCount: 0
       }
       
+      console.log('最终用户信息对象:', JSON.parse(JSON.stringify(userInfo.value)))
+      
       // 更新编辑表单
       editForm.phone = userInfo.value.phone || ''
       editForm.email = userInfo.value.email || ''
+    } else {
+      console.warn('API返回数据为空')
     }
   } catch (error) {
-    console.error('获取用户信息失败', error)
+    console.error('获取用户信息失败:', error)
     ElMessage.error('获取用户信息失败，请稍后重试')
+  } finally {
+    console.groupEnd()
   }
 }
 

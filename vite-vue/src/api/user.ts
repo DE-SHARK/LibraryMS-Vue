@@ -13,13 +13,14 @@ interface ApiResponse<T> {
 export interface UserDetailInfo {
     username: string
     email: string
-    college: string
-    major: string
-    studentId: string
-    grade: string
-    admissionYear: number
-    className: string
-    degreeType: string
+    college?: string | null
+    major?: string | null
+    studentId?: string | null
+    grade?: string | null
+    admissionYear?: number | null
+    className?: string | null
+    degreeType?: string | null
+    phone?: string | null
 }
 
 // 更新用户信息参数类型
