@@ -19,67 +19,6 @@ $wechat-color: #07C160;
   min-height: 100vh;
 }
 
-// 顶部导航栏
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: $spacing-medium;
-  background-color: $white;
-  box-shadow: $box-shadow;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logoArea {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 50px;
-  margin-right: $spacing-medium;
-}
-
-.logoText {
-  h1 {
-    margin: 0;
-    font-size: $font-size-large;
-    color: $primary-color;
-  }
-  
-  p {
-    margin: 0;
-    font-size: $font-size-small;
-    color: $gray-dark;
-  }
-}
-
-.navLinks {
-  flex: 1;
-  margin: 0 $spacing-large;
-  
-  .menu {
-    border-bottom: none;
-  }
-}
-
-.userArea {
-  display: flex;
-  align-items: center;
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  
-  span {
-    margin: 0 $spacing-small;
-  }
-}
-
 // 主要内容区域
 .mainContent {
   flex: 1;
@@ -474,20 +413,6 @@ $wechat-color: #07C160;
 
 // 响应式调整
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .navLinks {
-    margin: $spacing-medium 0;
-    width: 100%;
-  }
-  
-  .userArea {
-    align-self: flex-end;
-  }
-  
   .featureCards,
   .noticeCards {
     grid-template-columns: 1fr;

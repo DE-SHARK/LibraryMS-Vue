@@ -1,54 +1,91 @@
-// 头部样式
+@use '@/assets/scss/global/index' as *;
+
+// 颜色变量
+$primary-color: #3f51b5; // 更新为蓝紫色，更符合图书馆知识氛围
+$secondary-color: #7986cb; // 次要颜色
+$accent-color: #ff4081; // 强调色
+$primary-bg: #f5f7fa; // 更柔和的背景色
+$white: #fff;
+$gray-light: #e0e0e0;
+$gray: #999;
+$gray-dark: #666;
+$link-color: #3f51b5; // 与主色调一致
+$wechat-color: #07C160;
+
+// 顶部导航栏
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  height: 60px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding: $spacing-medium;
+  background-color: $white;
+  box-shadow: $box-shadow;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-  .logoArea {
-    display: flex;
-    align-items: center;
+.logoArea {
+  display: flex;
+  align-items: center;
+}
 
-    .logo {
-      height: 40px;
-      margin-right: 10px;
-    }
+.logo {
+  height: 50px;
+  margin-right: $spacing-medium;
+}
 
-    .logoText {
-      h1 {
-        font-size: 18px;
-        margin: 0;
-      }
+.logoText {
+  h1 {
+    margin: 0;
+    font-size: $font-size-large;
+    color: $primary-color;
+  }
 
-      p {
-        font-size: 12px;
-        margin: 0;
-        color: #666;
-      }
-    }
+  p {
+    margin: 0;
+    font-size: $font-size-small;
+    color: $gray-dark;
+  }
+}
+
+.navLinks {
+  flex: 1;
+  margin: 0 $spacing-large;
+
+  .menu {
+    border-bottom: none;
+  }
+}
+
+.userArea {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    margin: 0 $spacing-small;
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .navLinks {
-    flex: 1;
-    margin: 0 20px;
-
-    .menu {
-      border-bottom: none;
-    }
+    margin: $spacing-medium 0;
+    width: 100%;
   }
 
   .userArea {
-    .userInfo {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-
-      span {
-        margin: 0 5px;
-      }
-    }
+    align-self: flex-end;
   }
 }
