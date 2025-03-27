@@ -4,12 +4,17 @@ $secondary-color: #7986cb; // 次要颜色
 $accent-color: #ff4081; // 强调色
 $primary-bg: #f5f7fa; // 主背景色
 $white: #fff; // 白色
-$gray-light: #e0e0e0; // 浅灰
-$gray: #999; // 中灰
-$gray-dark: #666; // 深灰
 $link-color: #3f51b5; // 链接颜色
 $wechat-color: #07C160; // 微信绿
 $box-shadow-light: #f5f7fa; // 浅阴影
+// 灰色调色板 (补充lightest和lighter)
+$gray-darkest: #333;     // 最深灰
+$gray-darker: #555;      // 较深灰
+$gray-dark: #777;        // 深灰
+$gray: #999;             // 标准灰
+$gray-light: #ccc;       // 浅灰
+$gray-lighter: #e5e5e5;  // 更浅灰
+$gray-lightest: #f5f5f5; // 最浅灰
 
 // 主题颜色映射
 $theme-colors: (
@@ -25,13 +30,20 @@ $font-size-medium: 16px;
 $font-size-large: 24px;
 $font-size-xlarge: 28px;
 
-// 间距
-$spacing-small: 10px;
-$spacing-medium: 20px;
-$spacing-large: 30px;
-$spacing-xlarge: 40px;
+// 间距变量
+$spacing-xsmall: 4px;    // 超小间距
+$spacing-small: 8px;     // 小间距
+$spacing-medium: 12px;   // 中等间距
+$spacing-large: 16px;    // 大间距
+$spacing-xlarge: 24px;   // 超大间距
 
 // 边框
 $border-radius: 8px;
 $border-radius-small: 4px;
-$box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); 
+$box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+// 边框半径变量
+$border-radius-small: 4px;  // 小圆角
+$border-radius-medium: 8px; // 中等圆角
+$border-radius-large: 12px; // 大圆角
+$border-radius-xlarge: 16px; // 超大圆角
