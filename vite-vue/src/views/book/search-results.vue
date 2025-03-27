@@ -1,41 +1,7 @@
 <template>
   <div :class="style.searchResultsContainer">
     <!-- 顶部导航栏 -->
-    <header :class="style.header">
-      <div :class="style.logoArea">
-        <img src="@/assets/logo.svg" alt="广东药科大学图书馆" :class="style.logo" />
-        <div :class="style.logoText">
-          <h1>广东药科大学图书馆</h1>
-          <p>知识的殿堂，智慧的源泉</p>
-        </div>
-      </div>
-      <div :class="style.navLinks">
-        <el-menu mode="horizontal" :ellipsis="false" :class="style.menu" default-active="2">
-          <el-menu-item index="1" @click="router.push('/home')">首页</el-menu-item>
-          <el-menu-item index="2">馆藏资源</el-menu-item>
-          <el-menu-item index="3">借阅服务</el-menu-item>
-          <el-menu-item index="4">座位预约</el-menu-item>
-          <el-menu-item index="5">电子资源</el-menu-item>
-        </el-menu>
-      </div>
-      <div :class="style.userArea">
-        <el-dropdown>
-          <span :class="style.userInfo">
-            <el-avatar :size="32" :src="userAvatar" />
-            <span>{{ userName }}</span>
-            <el-icon><ArrowDown /></el-icon>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>个人中心</el-dropdown-item>
-              <el-dropdown-item>我的借阅</el-dropdown-item>
-              <el-dropdown-item>我的预约</el-dropdown-item>
-              <el-dropdown-item divided @click="handleLogout">退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-    </header>
+    <app-header></app-header>
 
     <!-- 主要内容区域 -->
     <main :class="style.mainContent">
@@ -135,31 +101,7 @@
     </main>
 
     <!-- 页脚 -->
-    <footer :class="style.footer">
-      <div :class="style.footerContent">
-        <div :class="style.footerSection">
-          <h3>联系我们</h3>
-          <p>地址：广东省广州市番禺区大学城外环东路280号</p>
-          <p>电话：020-12345678</p>
-          <p>邮箱：library@gdpu.edu.cn</p>
-        </div>
-        <div :class="style.footerSection">
-          <h3>开放时间</h3>
-          <p>周一至周五：8:00 - 22:00</p>
-          <p>周六至周日：9:00 - 21:00</p>
-          <p>节假日：9:00 - 17:00</p>
-        </div>
-        <div :class="style.footerSection">
-          <h3>快速链接</h3>
-          <p><a href="#">学校主页</a></p>
-          <p><a href="#">图书捐赠</a></p>
-          <p><a href="#">常见问题</a></p>
-        </div>
-      </div>
-      <div :class="style.copyright">
-        <p>© 2023 广东药科大学图书馆 版权所有</p>
-      </div>
-    </footer>
+    <app-footer></app-footer>
   </div>
 </template>
 
@@ -170,9 +112,9 @@ import { Search, ArrowDown, DocumentDelete } from '@element-plus/icons-vue';
 import { useCssModule } from 'vue';
 import { ElNotification, ElMessage } from 'element-plus';
 
-// 导入API函数
-import { logout, getCurrentUser } from '@/api/auth';
 import { searchBooks, type Book, type BookSearchParams } from '@/api/books';
+import AppFooter from "@/components/common/app-footer.vue";
+import AppHeader from "@/components/common/app-header.vue";
 
 // 定义组件名称
 defineComponent({
@@ -185,10 +127,6 @@ const style = useCssModule();
 // 路由
 const router = useRouter();
 const route = useRoute();
-
-// 用户信息
-const userName = ref('加载中...');
-const userAvatar = ref('/src/assets/avatar.svg');
 
 // 搜索相关
 const searchKeyword = ref(route.query.keyword as string || '');
@@ -209,23 +147,6 @@ const currentPage = ref(1);
 const pageSize = ref(20);
 const totalItems = ref(0);
 const totalPages = ref(0);
-
-// 获取用户信息
-const fetchUserInfo = async () => {
-  try {
-    const response = await getCurrentUser();
-    if (response.data) {
-      userName.value = response.data.username;
-      // 如果后端返回了头像URL，则使用后端返回的头像
-      if (response.data.avatar) {
-        userAvatar.value = response.data.avatar;
-      }
-    }
-  } catch (error) {
-    console.error('获取用户信息失败:', error);
-    ElMessage.error('获取用户信息失败');
-  }
-};
 
 // 搜索图书
 const fetchBooks = async () => {
@@ -298,18 +219,6 @@ const handleCurrentChange = (newPage: number) => {
   fetchBooks();
 };
 
-// 处理退出登录
-const handleLogout = async () => {
-  try {
-    await logout();
-    ElMessage.success('退出登录成功');
-    router.push('/login');
-  } catch (error) {
-    console.error('退出登录失败:', error);
-    ElMessage.error('退出登录失败，请重试');
-  }
-};
-
 // 监听路由参数变化
 watch(
     () => route.query,
@@ -327,9 +236,6 @@ watch(
 
 // 组件挂载时执行
 onMounted(() => {
-  // 获取用户信息
-  fetchUserInfo();
-
   // 如果URL中有搜索参数，则执行搜索
   if (searchKeyword.value) {
     fetchBooks();
