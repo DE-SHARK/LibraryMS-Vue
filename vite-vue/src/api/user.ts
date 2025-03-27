@@ -12,15 +12,14 @@ interface ApiResponse<T> {
 // 用户详细信息接口
 export interface UserDetailInfo {
     username: string
-    avatar: string
-    studentId: string
+    email: string
     college: string
     major: string
-    phone: string
-    email: string
-    borrowedCount: number
-    reservedCount: number
-    overdueCount: number
+    studentId: string
+    grade: string
+    admissionYear: number
+    className: string
+    degreeType: string
 }
 
 // 更新用户信息参数类型
