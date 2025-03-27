@@ -1,0 +1,131 @@
+@use '@/assets/scss/global/index' as global;
+
+.profileContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: global.$spacing-large;
+}
+
+.userCard {
+  margin-bottom: global.$spacing-large;
+  border-radius: global.$border-radius-large;
+  box-shadow: global.$box-shadow-light;
+
+  .userHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: global.$spacing-large;
+
+    .avatar {
+      margin-right: global.$spacing-large;
+    }
+
+    .userMeta {
+      flex: 1;
+
+      h2 {
+        margin: 0 0 global.$spacing-small;
+        font-size: global.$font-size-xlarge;
+      }
+
+      p {
+        margin: global.$spacing-xsmall 0;
+        color: global.$gray-dark;
+      }
+    }
+  }
+
+  .editForm {
+    margin-top: global.$spacing-large;
+    padding: global.$spacing-medium;
+    background-color: global.$gray-lightest;
+    border-radius: global.$border-radius-medium;
+
+    .formActions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: global.$spacing-medium;
+    }
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: global.$spacing-large;
+    padding-top: global.$spacing-large;
+    border-top: 1px solid global.$gray-lighter;
+
+    .statItem {
+      text-align: center;
+
+      .statNumber {
+        display: block;
+        font-size: global.$font-size-xlarge;
+        font-weight: bold;
+        color: global.$primary-color;
+      }
+
+      .statLabel {
+        color: global.$gray-dark;
+      }
+    }
+  }
+}
+
+.contentArea {
+  .tabs {
+    :global(.el-tabs__header) {
+      margin-bottom: global.$spacing-large;
+    }
+
+    :global(.el-tabs__item) {
+      font-size: global.$font-size-medium;
+    }
+  }
+
+  .infoSection {
+    h3 {
+      margin-bottom: global.$spacing-medium;
+      font-size: global.$font-size-large;
+    }
+  }
+
+  .emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    text-align: center;
+
+    .emptyIcon {
+      color: global.$gray-light;
+      margin-bottom: global.$spacing-medium;
+    }
+
+    p {
+      margin: global.$spacing-medium 0;
+      color: global.$gray-dark;
+    }
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .userCard {
+    .userHeader {
+      flex-direction: column;
+      text-align: center;
+
+      .avatar {
+        margin-right: 0;
+        margin-bottom: global.$spacing-medium;
+      }
+    }
+
+    .stats {
+      flex-direction: column;
+      gap: global.$spacing-medium;
+    }
+  }
+}

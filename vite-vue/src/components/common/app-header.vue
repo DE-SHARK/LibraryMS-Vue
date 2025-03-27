@@ -25,7 +25,7 @@
           </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item @click="goToProfile">个人中心</el-dropdown-item>
             <el-dropdown-item>我的借阅</el-dropdown-item>
             <el-dropdown-item>我的预约</el-dropdown-item>
             <el-dropdown-item divided @click="handleLogout">退出登录</el-dropdown-item>
@@ -55,6 +55,11 @@ const style = useCssModule();
 const router = useRouter();
 const userName = ref('加载中...');
 const userAvatar = ref('/src/assets/avatar.svg');
+
+// 添加跳转到个人中心的函数
+const goToProfile = () => {
+  router.push('/user/profile');
+};
 
 const fetchUserInfo = async () => {
   try {
