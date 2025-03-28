@@ -22,7 +22,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -40,26 +40,22 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 $spacing-medium;
-  
+  position: relative;
+  z-index: 1;
+
   h2 {
-    font-size: $font-size-xlarge;
-    margin-bottom: $spacing-small;
-  }
-  
-  p {
+    font-size: $font-size-large;
     margin-bottom: $spacing-medium;
-    font-size: $font-size-medium;
   }
 }
 
 .searchInput {
   display: flex;
-  margin-top: $spacing-medium;
-  
+
   :global(.el-input) {
     flex: 1;
   }
-  
+
   :global(.el-button) {
     margin-left: $spacing-small;
   }

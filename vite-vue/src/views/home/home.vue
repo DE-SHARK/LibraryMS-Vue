@@ -12,10 +12,11 @@
           <p>在这里，你可以搜索到丰富的图书资源</p>
           <div :class="style.searchInput">
             <el-input
-              v-model="searchKeyword"
-              placeholder="输入书名、作者或关键词"
-              :prefix-icon="Search"
-              clearable
+                v-model="searchKeyword"
+                placeholder="输入书名、作者或关键词"
+                :prefix-icon="Search"
+                clearable
+                @keyup.enter="handleSearch"
             >
               <template #append>
                 <el-select v-model="searchType" placeholder="类型" style="width: 100px">
