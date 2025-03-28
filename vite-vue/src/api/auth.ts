@@ -85,17 +85,17 @@ apiClient.interceptors.response.use(
         
         try {
           // 尝试刷新令牌
-          const response = await axios.post<ApiResponse<AuthToken>>(
-            'http://localhost:8080/api/auth/refresh', 
-            {}, 
-            { withCredentials: true }
+          const response = await apiClient.post<ApiResponse<AuthToken>>(
+              '/auth/refresh',
+              {},
+              { withCredentials: true }
           )
           
           const { accessToken } = response.data.data!
           
           // 保存新令牌
           tokenService.saveToken(accessToken)
-          
+          console.info("令牌刷新成功")
           // 通知所有等待的请求
           onTokenRefreshed(accessToken)
           
@@ -108,6 +108,8 @@ apiClient.interceptors.response.use(
         } catch (refreshError) {
           // 刷新令牌失败，需要重新登录
           tokenService.clearToken()
+          // 添加错误提示
+          ElMessage.error('会话已过期，请重新登录')
           // 重定向到登录页
           window.location.href = '/auth/sign-in'
           return Promise.reject(refreshError)
