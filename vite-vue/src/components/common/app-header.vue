@@ -9,7 +9,7 @@
     </div>
     <div :class="style.navLinks">
       <el-menu mode="horizontal" :ellipsis="false" :class="style.menu">
-        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="1" @click="goToHome">首页</el-menu-item>
         <el-menu-item index="2">馆藏资源</el-menu-item>
         <el-menu-item index="3">借阅服务</el-menu-item>
         <el-menu-item index="4">座位预约</el-menu-item>
@@ -59,6 +59,9 @@ const userAvatar = ref('/src/assets/avatar.svg');
 // 添加跳转到个人中心的函数
 const goToProfile = () => {
   router.push('/user/profile');
+};
+const goToHome = () => {
+  router.push('/home');
 };
 
 const fetchUserInfo = async () => {
