@@ -170,11 +170,12 @@ const handleRegister = async () => {
     });
 
     if (response.code === 200 && response.data) {
-      ElMessage.success(response.message || '注册成功');
+      ElMessage.success('注册成功');
       // 注册成功后跳转到登录页面
       await router.push('/auth/sign-in');
     } else {
-      ElMessage.error(response.message || '注册失败，请稍后重试');
+      console.error(response.message)
+      ElMessage.error('注册失败，请稍后重试');
     }
   } catch (error) {
     console.error('注册错误:', error);
