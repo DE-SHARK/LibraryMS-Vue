@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import { useCssModule } from 'vue'
 import { User, Edit, Setting, Message, Collection, Document, Lock, Bell, Star } from '@element-plus/icons-vue'
 import { getUserInfo, updateUserInfo } from '@/api/user'
@@ -15,8 +15,9 @@ interface UserInfo extends UserDetailInfo {
 }
 
 const style = useCssModule()
+const route = useRoute()
 const router = useRouter()
-const activeTab = ref('profile')
+const activeTab = ref(route.params.activeTab || 'profile')
 
 // 用户信息
 const userInfo = ref<UserInfo>({

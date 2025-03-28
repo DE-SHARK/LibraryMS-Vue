@@ -26,8 +26,8 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item @click="goToProfile">个人中心</el-dropdown-item>
-            <el-dropdown-item>我的借阅</el-dropdown-item>
-            <el-dropdown-item>我的预约</el-dropdown-item>
+            <el-dropdown-item @click="goToProfileBorrow">我的借阅</el-dropdown-item>
+            <el-dropdown-item @click="goToProfileReservation">我的预约</el-dropdown-item>
             <el-dropdown-item divided @click="handleLogout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -58,7 +58,13 @@ const userAvatar = ref('/src/assets/avatar.svg');
 
 // 添加跳转到个人中心的函数
 const goToProfile = () => {
-  router.push('/user/profile');
+  router.push('/profile');
+};
+const goToProfileBorrow = () => {
+  router.push('/profile/borrow');
+};
+const goToProfileReservation = () => {
+  router.push('/profile/reservation');
 };
 const goToHome = () => {
   router.push('/home');

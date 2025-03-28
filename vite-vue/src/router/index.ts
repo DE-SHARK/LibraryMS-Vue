@@ -33,7 +33,7 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/user/profile',
+      path: '/profile/:activeTab?',
       name: 'UserProfile',
       component: () => import('@/views/user/profile.vue'),
       meta: {
