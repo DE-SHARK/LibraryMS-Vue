@@ -73,7 +73,7 @@
                 <p :class="style.bookIsbn">ISBN: {{ book.isbn }}</p>
                 <p v-if="book.description" :class="style.bookDescription">{{ book.description }}</p>
                 <div :class="style.bookActions">
-                  <el-tag v-if="book.availableCopies > 0" type="success">可借阅: {{ book.availableCopies }}本</el-tag>
+                  <el-tag v-if="book.availableCopies > 0" type="success">可用库存: {{ book.availableCopies }}本</el-tag>
                   <el-tag v-else type="info">暂无可借</el-tag>
                   <div :class="style.actionButtons">
                     <el-button type="primary" size="small" :disabled="book.availableCopies <= 0">借阅</el-button>
