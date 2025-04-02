@@ -77,7 +77,7 @@
                   <el-tag v-else type="info">暂无可借</el-tag>
                   <div :class="style.actionButtons">
                     <el-button type="primary" size="small" :disabled="book.availableCopies <= 0">借阅</el-button>
-                    <el-button type="info" size="small">详情</el-button>
+                    <el-button type="info" size="small" @click="goToBookDetail(book.isbn)">详情</el-button>
                   </div>
                 </div>
               </div>
@@ -217,6 +217,11 @@ const handleSizeChange = (newSize: number) => {
 const handleCurrentChange = (newPage: number) => {
   currentPage.value = newPage;
   fetchBooks();
+};
+
+// 跳转到图书详情页
+const goToBookDetail = (isbn: string) => {
+  router.push(`/book/${isbn}`);
 };
 
 // 监听路由参数变化

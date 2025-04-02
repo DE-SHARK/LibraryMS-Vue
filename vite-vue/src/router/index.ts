@@ -33,6 +33,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/book/:isbn',
+      name: 'BookDetail',
+      component: () => import('../views/book/book-detail.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/profile/:activeTab?',
       name: 'UserProfile',
       component: () => import('@/views/user/profile.vue'),

@@ -12,13 +12,18 @@ interface ApiResponse<T> {
 // 定义图书接口数据类型
 export interface Book {
   isbn: string
+  isbn10?: string
   title: string
   author: string
   publisher?: string
-  publishYear?: number
+  publishedYear?: number
+  publishYear?: number // 兼容旧版API
+  language?: string
+  pageCount?: string
   description?: string
   coverImage?: string
   availableCopies?: number
+  createdAt?: string
 }
 
 // 定义搜索结果接口
