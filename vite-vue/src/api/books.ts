@@ -17,11 +17,10 @@ export interface Book {
   author: string
   publisher?: string
   publishedYear?: number
-  publishYear?: number // 兼容旧版API
   language?: string
   pageCount?: string
   description?: string
-  coverImage?: string
+  coverImageUrl?: string // 添加新的封面URL字段
   availableCopies?: number
   createdAt?: string
 }

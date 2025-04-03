@@ -60,7 +60,7 @@
             <div :class="style.bookContent">
               <div :class="style.bookCover">
                 <img 
-                  :src="book.coverImage || '/src/assets/book-placeholder.svg'" 
+                  :src="book.coverImageUrl || '/src/assets/book-placeholder.svg'" 
                   :alt="book.title" 
                   :class="style.coverImage"
                 />

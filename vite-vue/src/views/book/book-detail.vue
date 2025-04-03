@@ -33,7 +33,7 @@
           <div :class="style.bookCoverSection">
             <div :class="style.coverContainer">
               <img 
-                :src="book.coverImage || '/src/assets/book-placeholder.svg'" 
+                :src="book.coverImageUrl || '/src/assets/book-placeholder.svg'" 
                 :alt="book.title" 
                 :class="style.coverImage"
               />
