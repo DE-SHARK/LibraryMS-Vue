@@ -1,0 +1,230 @@
+@use '@/assets/scss/global/index' as *;
+
+// 座位预约页容器
+.seatReservationContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// 主要内容区域
+.mainContent {
+  flex: 1;
+  background-color: $primary-bg;
+  padding: $spacing-large 0;
+}
+
+// 座位预约区域
+.seatReservationSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-medium;
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+// 页面标题
+.pageTitle {
+  font-size: $font-size-xlarge;
+  color: $gray-darkest;
+  margin-bottom: $spacing-xlarge;
+  text-align: center;
+  font-weight: 600;
+}
+
+// 筛选区域
+.filterSection {
+  margin-bottom: $spacing-xlarge;
+  padding: $spacing-large;
+  background-color: $gray-lightest;
+  border-radius: $border-radius;
+}
+
+.filterForm {
+  width: 100%;
+}
+
+.searchBtnCol {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-medium;
+}
+
+// 图例区域
+.legendSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $spacing-large;
+  flex-wrap: wrap;
+  gap: $spacing-large;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  margin-right: $spacing-large;
+  
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.legendBox {
+  width: 24px;
+  height: 24px;
+  border-radius: $border-radius-small;
+  margin-right: $spacing-small;
+  border: 1px solid $gray-light;
+  
+  &.available {
+    background-color: #e1f5fe;
+    border-color: #4fc3f7;
+  }
+  
+  &.occupied {
+    background-color: #ffebee;
+    border-color: #ef9a9a;
+  }
+  
+  &.selected {
+    background-color: #e8f5e9;
+    border-color: #66bb6a;
+  }
+  
+  &.disabled {
+    background-color: $gray-lighter;
+    border-color: $gray-light;
+  }
+}
+
+// 座位图容器
+.seatMapContainer {
+  margin-bottom: $spacing-xlarge;
+}
+
+.loadingContainer, .emptyStateContainer {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seatMapWrapper {
+  padding: $spacing-large;
+  border: 1px solid $gray-lighter;
+  border-radius: $border-radius;
+}
+
+// 区域标题
+.sectionTitle {
+  font-size: $font-size-large;
+  color: $gray-darkest;
+  margin-bottom: $spacing-large;
+  font-weight: 500;
+}
+
+// 座位网格
+.seatGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: $spacing-medium;
+  margin-bottom: $spacing-large;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.seatItem {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid $gray-light;
+  
+  &.available {
+    background-color: #e1f5fe;
+    border-color: #4fc3f7;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(79, 195, 247, 0.3);
+    }
+  }
+  
+  &.occupied {
+    background-color: #ffebee;
+    border-color: #ef9a9a;
+    cursor: not-allowed;
+  }
+  
+  &.disabled {
+    background-color: $gray-lighter;
+    border-color: $gray-light;
+    cursor: not-allowed;
+  }
+  
+  &.selected {
+    background-color: #e8f5e9;
+    border-color: #66bb6a;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(102, 187, 106, 0.3);
+  }
+}
+
+.seatNumber {
+  font-size: $font-size-small;
+  font-weight: 500;
+}
+
+// 预约信息区域
+.reservationInfoSection {
+  padding: $spacing-large;
+  background-color: $gray-lightest;
+  border-radius: $border-radius;
+  margin-top: $spacing-xlarge;
+}
+
+.reservationDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-large;
+  margin-bottom: $spacing-large;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+}
+
+.detailLabel {
+  font-weight: 500;
+  color: $gray-dark;
+  margin-right: $spacing-small;
+  min-width: 80px;
+}
+
+.detailValue {
+  color: $gray-darkest;
+  font-weight: 500;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-large;
+  margin-top: $spacing-large;
+}

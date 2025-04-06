@@ -12,7 +12,7 @@
         <el-menu-item index="1" @click="goToHome">首页</el-menu-item>
         <el-menu-item index="2">馆藏资源</el-menu-item>
         <el-menu-item index="3">借阅服务</el-menu-item>
-        <el-menu-item index="4">座位预约</el-menu-item>
+        <el-menu-item index="4" @click="goToSeatReservation">座位预约</el-menu-item>
         <el-menu-item index="5">电子资源</el-menu-item>
       </el-menu>
     </div>
@@ -70,6 +70,10 @@ const goToHome = () => {
   router.push('/home');
 };
 
+// 添加跳转到座位预约的函数
+const goToSeatReservation = () => {
+  router.push('/seat-reservation');
+};
 const fetchUserInfo = async () => {
   try {
     const response = await getCurrentUser();

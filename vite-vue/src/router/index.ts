@@ -39,6 +39,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/seat-reservation',
+      name: 'SeatReservation',
+      component: () => import('../views/seat-reservation/seat-reservation.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/profile/:activeTab?',
       name: 'UserProfile',
       component: () => import('@/views/user/profile.vue'),
