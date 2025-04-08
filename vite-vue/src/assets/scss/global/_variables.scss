@@ -60,4 +60,5 @@ $text-color-secondary: $gray;         // 次要文本颜色
 $background-color-light: $gray-lightest; // 浅色背景
 
 // 扩展主题颜色
-$primary-color-light: lighten($primary-color, 15%); // 浅色主题色
+@use "sass:color";
+$primary-color-light: color.adjust($primary-color, $lightness: 15%); // 浅色主题色
