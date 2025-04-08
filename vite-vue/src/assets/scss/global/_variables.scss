@@ -47,3 +47,17 @@ $border-radius-small: 4px;  // 小圆角
 $border-radius-medium: 8px; // 中等圆角
 $border-radius-large: 12px; // 大圆角
 $border-radius-xlarge: 16px; // 超大圆角
+
+// 边框颜色
+$border-color: #e0e0e0;      // 标准边框颜色
+$border-color-light: #f0f0f0; // 浅色边框
+
+// 文本颜色
+$text-color-primary: $gray-darkest;   // 主要文本颜色
+$text-color-secondary: $gray;         // 次要文本颜色
+
+// 背景颜色
+$background-color-light: $gray-lightest; // 浅色背景
+
+// 扩展主题颜色
+$primary-color-light: lighten($primary-color, 15%); // 浅色主题色

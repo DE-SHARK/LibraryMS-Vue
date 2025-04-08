@@ -1,0 +1,114 @@
+@use '@/assets/scss/global/index' as *;
+
+// 评论区容器
+.commentsContainer {
+  margin-top: $spacing-xlarge;
+  padding-top: $spacing-large;
+  border-top: 1px solid $border-color;
+}
+
+// 评论区标题
+.commentsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: $spacing-large;
+  color: $text-color-primary;
+}
+
+// 评论列表
+.commentsList {
+  margin-bottom: $spacing-large;
+}
+
+// 评论项
+.commentItem {
+  padding: $spacing-medium;
+  border-bottom: 1px solid $border-color-light;
+  margin-bottom: $spacing-medium;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// 评论头部信息
+.commentHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-small;
+}
+
+// 用户头像
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: $spacing-medium;
+  background-color: $primary-color-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  font-weight: 600;
+}
+
+// 用户信息
+.userInfo {
+  flex: 1;
+}
+
+// 用户名
+.userName {
+  font-weight: 600;
+  color: $text-color-primary;
+  margin-bottom: 2px;
+}
+
+// 评论时间
+.commentTime {
+  font-size: 0.8rem;
+  color: $text-color-secondary;
+}
+
+// 评论内容
+.commentContent {
+  margin-left: 56px; // 头像宽度 + 右边距
+  color: $text-color-primary;
+  line-height: 1.5;
+}
+
+// 评论表单
+.commentForm {
+  margin-top: $spacing-large;
+  background-color: $background-color-light;
+  padding: $spacing-medium;
+  border-radius: $border-radius;
+}
+
+// 表单标题
+.formTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: $spacing-medium;
+  color: $text-color-primary;
+}
+
+// 表单操作区
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-medium;
+}
+
+// 提交按钮
+.submitButton {
+  min-width: 100px;
+}
+
+// 无评论提示
+.noComments {
+  text-align: center;
+  padding: $spacing-large;
+  color: $text-color-secondary;
+  font-style: italic;
+}

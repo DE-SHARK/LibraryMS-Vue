@@ -101,6 +101,11 @@
           </div>
         </div>
       </div>
+
+      <!-- 评论区域 -->
+      <div v-if="!loading && !error" :class="style.bookDetailSection">
+        <book-comments :bookIsbn="book.isbn" @comment-added="handleCommentAdded"></book-comments>
+      </div>
     </main>
 
     <!-- 页脚 -->
@@ -118,6 +123,7 @@ import { ElMessage } from 'element-plus';
 import { getBookDetail, type Book } from '@/api/books';
 import AppFooter from "@/components/common/app-footer.vue";
 import AppHeader from "@/components/common/app-header.vue";
+import BookComments from "@/components/book/book-comments.vue";
 
 // 定义组件名称
 defineComponent({
@@ -181,6 +187,13 @@ const handleBorrow = () => {
   
   // 这里可以添加借阅逻辑，例如跳转到借阅确认页面或调用借阅API
   ElMessage.success('借阅请求已提交，请前往个人中心查看借阅状态');
+};
+
+// 处理评论添加事件
+const handleCommentAdded = () => {
+  // 可以在这里添加评论成功后的处理逻辑
+  // 例如刷新图书信息或更新UI等
+  ElMessage.success('感谢您的评论！');
 };
 
 // 组件挂载时执行
